@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rickandmorty/app/data/datasources/get_character/get_character_datasource.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
-import '../../../data/datasources/get_character//get_character_datasource.dart';
 import 'package:rickandmorty/core/services/services.dart';
 
 final $GetCharacterImpDatasource = BindInject(
