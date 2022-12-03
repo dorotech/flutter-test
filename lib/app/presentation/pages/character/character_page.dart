@@ -27,17 +27,19 @@ class _CharacterPageState extends State<CharacterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Observer(builder: (context) {
-        return _controller.listCharacters != null
-            ? ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: _controller.listCharacters!.length,
-                itemBuilder: ((context, index) =>
-                    _buildCard(_controller.listCharacters![index])),
-              )
-            : const Center(
-                child: CircularProgressIndicator(),
-              );
+        return Container(
+          child: _controller.listCharacters != null
+              ? ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: _controller.paginationSize,
+                  itemBuilder: ((context, index) =>
+                      _buildCard(_controller.listCharacters![index])),
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
+        );
       }),
     );
   }

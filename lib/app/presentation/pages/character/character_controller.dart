@@ -26,12 +26,27 @@ abstract class _CharacterControllerBase with Store {
   @observable
   List<CharacterDto>? listCharacters;
 
+  @observable
+  String? nameQuery;
+
+  @observable
+  int page = 1;
+
+  @observable
+  int paginationSize = 20;
+
   @action
-  Future<ResultPresentation> getCharacters({String? query}) async {
+  void setPage(int value) => page = value;
+
+  @action
+  void setPaginationSize(int value) => paginationSize = value;
+
+  @action
+  Future<ResultPresentation> getCharacters() async {
     try {
       loading = true;
 
-      listCharacters = await _characterUsecase(query);
+      listCharacters = await _characterUsecase(nameQuery);
       loading = false;
       return ResultPresentation(payload: listCharacters);
     } on RMException catch (e) {

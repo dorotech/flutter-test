@@ -41,20 +41,95 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$nameQueryAtom =
+      Atom(name: '_CharacterControllerBase.nameQuery', context: context);
+
+  @override
+  String? get nameQuery {
+    _$nameQueryAtom.reportRead();
+    return super.nameQuery;
+  }
+
+  @override
+  set nameQuery(String? value) {
+    _$nameQueryAtom.reportWrite(value, super.nameQuery, () {
+      super.nameQuery = value;
+    });
+  }
+
+  late final _$pageAtom =
+      Atom(name: '_CharacterControllerBase.page', context: context);
+
+  @override
+  int get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(int value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
+  late final _$paginationSizeAtom =
+      Atom(name: '_CharacterControllerBase.paginationSize', context: context);
+
+  @override
+  int get paginationSize {
+    _$paginationSizeAtom.reportRead();
+    return super.paginationSize;
+  }
+
+  @override
+  set paginationSize(int value) {
+    _$paginationSizeAtom.reportWrite(value, super.paginationSize, () {
+      super.paginationSize = value;
+    });
+  }
+
   late final _$getCharactersAsyncAction =
       AsyncAction('_CharacterControllerBase.getCharacters', context: context);
 
   @override
-  Future<ResultPresentation> getCharacters({String? query}) {
-    return _$getCharactersAsyncAction
-        .run(() => super.getCharacters(query: query));
+  Future<ResultPresentation> getCharacters() {
+    return _$getCharactersAsyncAction.run(() => super.getCharacters());
+  }
+
+  late final _$_CharacterControllerBaseActionController =
+      ActionController(name: '_CharacterControllerBase', context: context);
+
+  @override
+  void setPage(int value) {
+    final _$actionInfo = _$_CharacterControllerBaseActionController.startAction(
+        name: '_CharacterControllerBase.setPage');
+    try {
+      return super.setPage(value);
+    } finally {
+      _$_CharacterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPaginationSize(int value) {
+    final _$actionInfo = _$_CharacterControllerBaseActionController.startAction(
+        name: '_CharacterControllerBase.setPaginationSize');
+    try {
+      return super.setPaginationSize(value);
+    } finally {
+      _$_CharacterControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
 loading: ${loading},
-listCharacters: ${listCharacters}
+listCharacters: ${listCharacters},
+nameQuery: ${nameQuery},
+page: ${page},
+paginationSize: ${paginationSize}
     ''';
   }
 }
