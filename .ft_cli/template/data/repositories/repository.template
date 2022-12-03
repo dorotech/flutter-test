@@ -1,0 +1,29 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import '../../../{{repositoryPathInterface}}/{{repositoryNameFileInterface.snakeCase}}.dart';
+import '../../datasources/{{datasourceNameFileInterface.snakeCase}}.dart';
+import 'package:rickandmorty/app/domain/models/exceptions/exception.dart';
+import 'package:rickandmorty/app/domain/models/exceptions/generic_exception.dart';
+
+final ${{repositoryNameClass.pascalCase}} = BindInject(
+  (i) => {{repositoryNameClass.pascalCase}}(i.get()),
+  isSingleton: true,
+  isLazy: true,
+);
+
+class {{repositoryNameClass.pascalCase}} implements {{repositoryNameClassInterface.pascalCase}} {
+  final {{datasourceNameClassInterface.pascalCase}} _{{datasourceNameClassInterface.camelCase}};
+
+  {{repositoryNameClass.pascalCase}}(this._{{datasourceNameClassInterface.camelCase}});
+
+  @override
+  Future<void> call() async {
+    try {
+      return await _{{datasourceNameClassInterface.camelCase}}();
+    } on RMException catch (e) {
+      rethrow;
+    } catch (e) {
+      throw GenericException();
+    }
+  }
+}
+  
