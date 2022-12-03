@@ -45,8 +45,9 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
       AsyncAction('_CharacterControllerBase.getCharacters', context: context);
 
   @override
-  Future<ResultPresentation> getCharacters() {
-    return _$getCharactersAsyncAction.run(() => super.getCharacters());
+  Future<ResultPresentation> getCharacters({String? query}) {
+    return _$getCharactersAsyncAction
+        .run(() => super.getCharacters(query: query));
   }
 
   @override

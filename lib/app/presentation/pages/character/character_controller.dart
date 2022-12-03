@@ -27,11 +27,11 @@ abstract class _CharacterControllerBase with Store {
   List<CharacterDto>? listCharacters;
 
   @action
-  Future<ResultPresentation> getCharacters() async {
+  Future<ResultPresentation> getCharacters({String? query}) async {
     try {
       loading = true;
 
-      listCharacters = await _characterUsecase();
+      listCharacters = await _characterUsecase(query);
       loading = false;
       return ResultPresentation(payload: listCharacters);
     } on RMException catch (e) {

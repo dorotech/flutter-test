@@ -15,7 +15,7 @@ class GetCharacterImpUsecase implements GetCharacterUsecase {
   GetCharacterImpUsecase(this._getCharacterRepository);
 
   @override
-  Future<List<CharacterDto>?> call() async {
-    return await _getCharacterRepository();
+  Future<List<CharacterDto>?> call(String? query) async {
+    return await _getCharacterRepository(query);
   }
 }

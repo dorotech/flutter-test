@@ -15,10 +15,14 @@ class GetCharacterImpDatasource implements GetCharacterDatasource {
   GetCharacterImpDatasource(ClientHttps clientHttps)
       : _clientHttps = clientHttps;
 
-  final _endpoint = '/character';
-
   @override
-  Future<List<CharacterDto>?> call() async {
+  Future<List<CharacterDto>?> call(String? query) async {
+    String _endpoint = '/character';
+
+    if (query != null) {
+      _endpoint = '/character?$query';
+    }
+
     final result = await _clientHttps.get(_endpoint);
 
     result.data = result.data['results'];

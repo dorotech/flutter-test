@@ -18,9 +18,9 @@ class GetCharacterImpRepository implements GetCharacterRepository {
   GetCharacterImpRepository(this._getCharacterDatasource);
 
   @override
-  Future<List<CharacterDto>?> call() async {
+  Future<List<CharacterDto>?> call(String? query) async {
     try {
-      return await _getCharacterDatasource();
+      return await _getCharacterDatasource(query);
     } on RMException catch (e) {
       clLog(e);
       rethrow;
