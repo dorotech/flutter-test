@@ -195,8 +195,10 @@ class _CharacterPageState extends State<CharacterPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Página ${_controller.page}: Mostrando ${_controller.paginationSize} de ${_controller.listCharacters?.length} resultados',
+          Expanded(
+            child: Text(
+              'Página ${_controller.page}: Mostrando ${_controller.paginationSize} de ${_controller.listCharacters?.length} resultados',
+            ),
           ),
           if (_controller.page > 1)
             IconButton(

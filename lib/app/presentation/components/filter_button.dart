@@ -15,7 +15,7 @@ class FilterButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
               width: 0.7,
-              color: isFiltered ? Colors.blue : Colors.grey,
+              color: isFiltered ? Colors.blue : Colors.black,
               style: BorderStyle.solid),
         ),
         child: Padding(
@@ -28,12 +28,12 @@ class FilterButton extends StatelessWidget {
                 child: Text(
                   'Filtrar',
                   style:
-                      TextStyle(color: isFiltered ? Colors.blue : Colors.grey),
+                      TextStyle(color: isFiltered ? Colors.blue : Colors.black),
                 ),
               ),
               ImageIcon(
                 const AssetImage('assets/filter_icon.png'),
-                color: isFiltered ? Colors.blue : Colors.grey,
+                color: isFiltered ? Colors.blue : Colors.black,
               ),
             ],
           ),
