@@ -41,6 +41,70 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$gendersAtom =
+      Atom(name: '_CharacterControllerBase.genders', context: context);
+
+  @override
+  List<Widget> get genders {
+    _$gendersAtom.reportRead();
+    return super.genders;
+  }
+
+  @override
+  set genders(List<Widget> value) {
+    _$gendersAtom.reportWrite(value, super.genders, () {
+      super.genders = value;
+    });
+  }
+
+  late final _$statusAtom =
+      Atom(name: '_CharacterControllerBase.status', context: context);
+
+  @override
+  List<Widget> get status {
+    _$statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(List<Widget> value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
+  late final _$selectedGendersAtom =
+      Atom(name: '_CharacterControllerBase.selectedGenders', context: context);
+
+  @override
+  List<bool> get selectedGenders {
+    _$selectedGendersAtom.reportRead();
+    return super.selectedGenders;
+  }
+
+  @override
+  set selectedGenders(List<bool> value) {
+    _$selectedGendersAtom.reportWrite(value, super.selectedGenders, () {
+      super.selectedGenders = value;
+    });
+  }
+
+  late final _$selectedStatusAtom =
+      Atom(name: '_CharacterControllerBase.selectedStatus', context: context);
+
+  @override
+  List<bool> get selectedStatus {
+    _$selectedStatusAtom.reportRead();
+    return super.selectedStatus;
+  }
+
+  @override
+  set selectedStatus(List<bool> value) {
+    _$selectedStatusAtom.reportWrite(value, super.selectedStatus, () {
+      super.selectedStatus = value;
+    });
+  }
+
   late final _$nameControllerAtom =
       Atom(name: '_CharacterControllerBase.nameController', context: context);
 
@@ -57,6 +121,22 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$speciesControllerAtom = Atom(
+      name: '_CharacterControllerBase.speciesController', context: context);
+
+  @override
+  TextEditingController get speciesController {
+    _$speciesControllerAtom.reportRead();
+    return super.speciesController;
+  }
+
+  @override
+  set speciesController(TextEditingController value) {
+    _$speciesControllerAtom.reportWrite(value, super.speciesController, () {
+      super.speciesController = value;
+    });
+  }
+
   late final _$nameQueryAtom =
       Atom(name: '_CharacterControllerBase.nameQuery', context: context);
 
@@ -70,6 +150,54 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
   set nameQuery(String? value) {
     _$nameQueryAtom.reportWrite(value, super.nameQuery, () {
       super.nameQuery = value;
+    });
+  }
+
+  late final _$speciesQueryAtom =
+      Atom(name: '_CharacterControllerBase.speciesQuery', context: context);
+
+  @override
+  String? get speciesQuery {
+    _$speciesQueryAtom.reportRead();
+    return super.speciesQuery;
+  }
+
+  @override
+  set speciesQuery(String? value) {
+    _$speciesQueryAtom.reportWrite(value, super.speciesQuery, () {
+      super.speciesQuery = value;
+    });
+  }
+
+  late final _$genderQueryAtom =
+      Atom(name: '_CharacterControllerBase.genderQuery', context: context);
+
+  @override
+  String? get genderQuery {
+    _$genderQueryAtom.reportRead();
+    return super.genderQuery;
+  }
+
+  @override
+  set genderQuery(String? value) {
+    _$genderQueryAtom.reportWrite(value, super.genderQuery, () {
+      super.genderQuery = value;
+    });
+  }
+
+  late final _$statusQueryAtom =
+      Atom(name: '_CharacterControllerBase.statusQuery', context: context);
+
+  @override
+  String? get statusQuery {
+    _$statusQueryAtom.reportRead();
+    return super.statusQuery;
+  }
+
+  @override
+  set statusQuery(String? value) {
+    _$statusQueryAtom.reportWrite(value, super.statusQuery, () {
+      super.statusQuery = value;
     });
   }
 
@@ -121,6 +249,22 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$isFilterOpenAtom =
+      Atom(name: '_CharacterControllerBase.isFilterOpen', context: context);
+
+  @override
+  bool get isFilterOpen {
+    _$isFilterOpenAtom.reportRead();
+    return super.isFilterOpen;
+  }
+
+  @override
+  set isFilterOpen(bool value) {
+    _$isFilterOpenAtom.reportWrite(value, super.isFilterOpen, () {
+      super.isFilterOpen = value;
+    });
+  }
+
   late final _$getCharactersAsyncAction =
       AsyncAction('_CharacterControllerBase.getCharacters', context: context);
 
@@ -131,6 +275,17 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
 
   late final _$_CharacterControllerBaseActionController =
       ActionController(name: '_CharacterControllerBase', context: context);
+
+  @override
+  void setPage(int value) {
+    final _$actionInfo = _$_CharacterControllerBaseActionController.startAction(
+        name: '_CharacterControllerBase.setPage');
+    try {
+      return super.setPage(value);
+    } finally {
+      _$_CharacterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setIsFiltered(bool value) {
@@ -144,11 +299,11 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
   }
 
   @override
-  void setPage(int value) {
+  void setIsFilterOpen(bool value) {
     final _$actionInfo = _$_CharacterControllerBaseActionController.startAction(
-        name: '_CharacterControllerBase.setPage');
+        name: '_CharacterControllerBase.setIsFilterOpen');
     try {
-      return super.setPage(value);
+      return super.setIsFilterOpen(value);
     } finally {
       _$_CharacterControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -170,11 +325,20 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     return '''
 loading: ${loading},
 listCharacters: ${listCharacters},
+genders: ${genders},
+status: ${status},
+selectedGenders: ${selectedGenders},
+selectedStatus: ${selectedStatus},
 nameController: ${nameController},
+speciesController: ${speciesController},
 nameQuery: ${nameQuery},
+speciesQuery: ${speciesQuery},
+genderQuery: ${genderQuery},
+statusQuery: ${statusQuery},
 page: ${page},
 paginationSize: ${paginationSize},
-isFiltered: ${isFiltered}
+isFiltered: ${isFiltered},
+isFilterOpen: ${isFilterOpen}
     ''';
   }
 }

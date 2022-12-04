@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/character_details_controller.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/components/character_details_card.dart';
+import 'package:rickandmorty/core/routes/app_routes.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
   final CharacterDto character;
@@ -53,7 +54,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 24, top: 10, bottom: 10),
         child: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => AppRouters.goToCharacters(),
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),

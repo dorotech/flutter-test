@@ -46,6 +46,15 @@ class _CharacterPageState extends State<CharacterPage> {
                   _buildFilterButton(),
                 ],
               ),
+              if (_controller.isFilterOpen)
+                Column(
+                  children: [
+                    _buildNameSearch(),
+                    _buildSpeciesSearch(),
+                    _buildGenderSelect(),
+                    _buildStatusSelect(),
+                  ],
+                ),
               Expanded(
                 child: _controller.loading == true
                     ? const Center(
@@ -65,10 +74,12 @@ class _CharacterPageState extends State<CharacterPage> {
                                   _controller.listCharacters![index])),
                             ),
                           )
-                        : const Center(
-                            child: EmptyData(
-                              title: "Nenhum personagem encontrado!",
-                              message: "tente mudar os filtros.",
+                        : const SingleChildScrollView(
+                            child: Center(
+                              child: EmptyData(
+                                title: "Nenhum personagem encontrado!",
+                                message: "tente mudar os filtros.",
+                              ),
                             ),
                           ),
               ),
@@ -91,10 +102,10 @@ class _CharacterPageState extends State<CharacterPage> {
     );
   }
 
-  Widget _builNameSearch() {
+  Widget _buildNameSearch() {
     return Observer(builder: (context) {
       return Padding(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: TextField(
           controller: _controller.nameController,
           decoration: const InputDecoration(
@@ -107,9 +118,39 @@ class _CharacterPageState extends State<CharacterPage> {
             if (value.length > 3) {
               _controller.nameQuery = "name=$value";
               _controller.getCharacters();
+              _controller.setIsFiltered(true);
             } else if (value.isEmpty) {
               _controller.nameQuery = null;
               _controller.getCharacters();
+              _verifyFilters();
+            }
+          }),
+        ),
+      );
+    });
+  }
+
+  Widget _buildSpeciesSearch() {
+    return Observer(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: TextField(
+          controller: _controller.speciesController,
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Icons.search),
+            labelText: 'Filtrar por espécie',
+            labelStyle: TextStyle(fontSize: 16),
+            border: OutlineInputBorder(),
+          ),
+          onChanged: ((value) {
+            if (value.length > 3) {
+              _controller.speciesQuery = "species=$value";
+              _controller.getCharacters();
+              _controller.setIsFiltered(true);
+            } else if (value.isEmpty) {
+              _controller.speciesQuery = null;
+              _controller.getCharacters();
+              _verifyFilters();
             }
           }),
         ),
@@ -184,12 +225,196 @@ class _CharacterPageState extends State<CharacterPage> {
         padding: const EdgeInsets.all(15),
         child: FilterButton(
           isFiltered: _controller.isFiltered,
+          onTap: () => _controller.isFilterOpen = !_controller.isFilterOpen,
+        ),
+      );
+    });
+  }
+
+  Widget _buildGenderSelect() {
+    return Observer(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Gender:',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            ToggleButtons(
+              direction: Axis.horizontal,
+              onPressed: (int index) {
+                setState(() {
+                  switch (index) {
+                    case 0:
+                      _controller.selectedGenders[index] =
+                          !_controller.selectedGenders[index];
+                      _controller.selectedGenders[1] = false;
+                      _controller.selectedGenders[2] = false;
+                      if (_controller.selectedGenders[index] == true) {
+                        _controller.genderQuery = "gender=male";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.genderQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                    case 1:
+                      _controller.selectedGenders[index] =
+                          !_controller.selectedGenders[index];
+                      _controller.selectedGenders[0] = false;
+                      _controller.selectedGenders[2] = false;
+                      if (_controller.selectedGenders[index] == true) {
+                        _controller.genderQuery = "gender=female";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.genderQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                    case 2:
+                      _controller.selectedGenders[index] =
+                          !_controller.selectedGenders[index];
+                      _controller.selectedGenders[1] = false;
+                      _controller.selectedGenders[0] = false;
+                      if (_controller.selectedGenders[index] == true) {
+                        _controller.genderQuery = "gender=unknown";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.genderQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                  }
+                });
+              },
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              selectedBorderColor: Colors.blue[700],
+              selectedColor: Colors.white,
+              fillColor: Colors.blue[200],
+              color: Colors.black,
+              constraints: const BoxConstraints(
+                minHeight: 40,
+                minWidth: 80,
+              ),
+              isSelected: _controller.selectedGenders,
+              children: _controller.genders,
+            ),
+          ],
+        ),
+      );
+    });
+  }
+
+  Widget _buildStatusSelect() {
+    return Observer(builder: (context) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Status: ',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            ToggleButtons(
+              direction: Axis.horizontal,
+              onPressed: (int index) {
+                setState(() {
+                  switch (index) {
+                    case 0:
+                      _controller.selectedStatus[index] =
+                          !_controller.selectedStatus[index];
+                      _controller.selectedStatus[1] = false;
+                      _controller.selectedStatus[2] = false;
+                      if (_controller.selectedStatus[index] == true) {
+                        _controller.statusQuery = "status=alive";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.statusQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                    case 1:
+                      _controller.selectedStatus[index] =
+                          !_controller.selectedStatus[index];
+                      _controller.selectedStatus[0] = false;
+                      _controller.selectedStatus[2] = false;
+                      if (_controller.selectedStatus[index] == true) {
+                        _controller.statusQuery = "status=dead";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.statusQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                    case 2:
+                      _controller.selectedStatus[index] =
+                          !_controller.selectedStatus[index];
+                      _controller.selectedStatus[1] = false;
+                      _controller.selectedStatus[0] = false;
+                      if (_controller.selectedStatus[index] == true) {
+                        _controller.statusQuery = "status=unknown";
+                        _controller.getCharacters();
+                        _controller.setIsFiltered(true);
+                      } else {
+                        _controller.statusQuery = null;
+                        _controller.getCharacters();
+                        _verifyFilters();
+                      }
+                      break;
+                  }
+                });
+              },
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              selectedBorderColor: Colors.blue[700],
+              selectedColor: Colors.white,
+              fillColor: Colors.blue[200],
+              color: Colors.black,
+              constraints: const BoxConstraints(
+                minHeight: 40,
+                minWidth: 80,
+              ),
+              isSelected: _controller.selectedStatus,
+              children: _controller.status,
+            ),
+          ],
         ),
       );
     });
   }
 
   Widget _buildPagination() {
+    int paginationSize;
+    if (_controller.listCharacters == null) {
+      paginationSize = 0;
+    } else if (_controller.paginationSize >
+        _controller.listCharacters!.length) {
+      paginationSize = _controller.listCharacters!.length;
+    } else {
+      paginationSize = _controller.paginationSize;
+    }
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Row(
@@ -197,7 +422,7 @@ class _CharacterPageState extends State<CharacterPage> {
         children: [
           Expanded(
             child: Text(
-              'Page ${_controller.page}: Showing ${_controller.paginationSize} of ${_controller.listCharacters?.length} results',
+              'Page ${_controller.page}: Showing $paginationSize of ${_controller.listCharacters?.length ?? 0} results',
             ),
           ),
           if (_controller.page > 1)
@@ -220,5 +445,14 @@ class _CharacterPageState extends State<CharacterPage> {
         ],
       ),
     );
+  }
+
+  _verifyFilters() {
+    if (_controller.nameQuery == null &&
+        _controller.genderQuery == null &&
+        _controller.statusQuery == null &&
+        _controller.speciesQuery == null) {
+      _controller.setIsFiltered(false);
+    }
   }
 }
