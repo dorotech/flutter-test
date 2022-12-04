@@ -69,7 +69,7 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
       leading: Padding(
         padding: const EdgeInsets.only(left: 24, top: 10, bottom: 10),
         child: IconButton(
-          onPressed: () => AppRouters.goToCharacters(),
+          onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back_ios),
           color: Colors.black,
         ),
