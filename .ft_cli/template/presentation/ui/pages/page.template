@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import '{{controllerNameFile.snakeCase}}.dart';
+
+class {{pageNameClass.pascalCase}} extends StatefulWidget {
+  const {{pageNameClass.pascalCase}}({Key? key}) : super(key: key);
+
+  @override
+  createState() => _{{pageNameClass.pascalCase}}State();
+}
+
+class _{{pageNameClass.pascalCase}}State extends State<{{pageNameClass.pascalCase}}> {
+  final _controller = Modular.get<{{controllerNameClass}}>();
+
+  @override
+  void initState() {
+    _controller.setLoading(true);
+    Future.delayed(const Duration(seconds: 1), () => _controller.setLoading(false));
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('{{name.titleCase}}')),
+      body: Center(
+        child: Observer(
+          builder: (context) {
+            if (_controller.loading) {
+              return const SizedBox(
+                height: 35,
+                width: 35,
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return const Text('{{name.titleCase}}');
+          },
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,39 @@
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{datasourcePathInterface}}/{{datasourceNameFileInterface}}.dart';
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{repositoryPathInterface}}/{{repositoryNameFileInterface}}.dart';
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{usecasePathInterface}}/{{usecaseNameFileInterface}}.dart';
+import 'package:{{path.replace(\,/).replace(lib/,)}}/{{module}}_module.dart';
+
+import 'package:flut_micro_commons_dependencies/flut_micro_commons_dependencies.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:modular_test/modular_test.dart';
+
+class {{name.pascalCase}}Mock extends Mock
+    implements {{datasourceNameClassInterface}} {}
+
+void main() {
+  late final {{datasourceNameClassInterface}} datasource;
+  late final {{repositoryNameClassInterface}} repository;
+  late final {{usecaseNameClassInterface}} usecase;
+
+  setUp(() {
+    LocalJsonLocalization.delegate.directories = [
+      'assets/lang',
+    ];
+
+    initModule({{module.pascalCase}}Module(), replaceBinds: [
+      Bind.singleton<{{datasourceNameClassInterface}}>(
+        (i) => {{name.pascalCase}}Mock(),
+      ),
+    ]);
+
+    datasource = Modular.get<{{datasourceNameClassInterface}}>();
+    repository = Modular.get<{{repositoryNameClassInterface}}>();
+    usecase = Modular.get<{{usecaseNameClassInterface}}>();
+  });
+
+  test('Test', () async {
+    when(() => datasource()).thenAnswer((_) async {});
+
+    expect(usecase(), returnsNormally);
+  });
+}

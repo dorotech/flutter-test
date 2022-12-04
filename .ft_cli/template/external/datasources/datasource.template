@@ -1,0 +1,25 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import '../../../{{datasourcePathInterface}}/{{datasourceNameFileInterface.snakeCase}}.dart';
+import 'package:rickandmorty/core/services/services.dart';
+
+final ${{datasourceNameClass.pascalCase}} = BindInject(
+  (i) => {{datasourceNameClass.pascalCase}}(i()),
+  isSingleton: true,
+  isLazy: true,
+);
+
+class {{datasourceNameClass.pascalCase}} implements {{datasourceNameClassInterface.pascalCase}} {
+  final ClientHttps _clientHttps;
+
+  {{datasourceNameClass.pascalCase}}(ClientHttps clientHttps)
+      : _clientHttps = clientHttps;
+
+  final _endpoint = '/';
+
+  @override
+  Future<void> call() async {
+    final result = await _clientHttps.get(_endpoint);
+  }
+}
+  
+  

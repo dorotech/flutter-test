@@ -1,0 +1,49 @@
+name: rickandmorty
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  # Generate Clean Arch structure
+  ft_cli: ^0.1.8+8
+
+  # State Management
+  mobx: ^2.1.3
+  flutter_mobx: ^2.0.6+5
+
+  # Dependency Injection and Routes
+  flutter_modular: ^5.0.3
+  modular_core: ^2.0.3+1
+
+  # Client Http
+  dio: ^4.0.6
+
+  pull_to_refresh: ^2.0.0
+
+dev_dependencies:
+  mobx_codegen: ^2.1.1
+  modular_test: ^2.0.0
+
+  flutter_test:
+    sdk: flutter
+  
+  flutter_lints: ^2.0.1
+  build_runner: ^2.3.2
+
+
+  
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/

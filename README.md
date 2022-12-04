@@ -1,74 +1,63 @@
-# Desafio para Flutter Developer na DoroTech
+# App de listagem de personagens de Rick and Morty
 
-Somos uma empresa com clientes que atuam em vários segmentos do mercado, com diferentes tecnologias, culturas e desafios.
+Aplicação produzida como teste prático, utilizando a API pública da série Rick and Morty [https://rickandmortyapi.com/](https://rickandmortyapi.com/).
 
-Gostamos de compor nossos times com profissionais multidisciplinares, que tenham alta capacidade de aprendizado, sejam detalhistas, resilientes, questionadores e curiosos.
-Você, como **Flutter Developer**, será o responsável por implementar, dar manutenção, aplicar correções e propor soluções em projetos de software.
+## Projeto
 
-## Orientações
-Para executar o desafio de **Flutter Developer**, você **deverá utilizar framework Flutter e seguir suas boas práticas**, seguindo o [passo a passo](https://github.com/dorotech/flutter-test#etapas) para a execução, atendendo aos [critérios de aceitação](https://github.com/dorotech/flutter-test#critérios-de-aceitação).
+Aplicação para listar os personagens da série Rick and Morty, com funcionalidades relacionadas a filtragem e detalhamento de informações dos mesmos. No app é possível combinar filtros e encontrar o personagem que deseja ou até mesmo buscá-lo diretamente pelo nome.
 
-## Desafio
-Nossa equipe é apaixonada por **Rick and Morty**, o seu desafio será criar uma aplicação utilizando a API pública da série [https://rickandmortyapi.com/](https://rickandmortyapi.com/), para exibir a lista de  personagens.
-Veja a documentação [https://rickandmortyapi.com/documentation/#rest](https://rickandmortyapi.com/documentation/#rest).
+## Tecnologias
+#### Framework - Flutter: 3.3.8
+documentação: https://docs.flutter.dev
 
-Os requisitos da aplicação:
+#### Linguagem - Dart: 2.18.4
+documentação: https://dart.dev/guides
 
-- Como usuário, desejo visualizar na página inicial, uma lista de 20 personagens incialmente, contendo **foto**, **nome** e **status**, com o tamanho da paginação sendo dinamica, podendo ser selecionando, 5, 10 ou 20 itens por vez.
-- Como usuário, desejo clicar em um personagem da lista, para visualizar informações detalhadas. (seja criativo a api contem diversas informaçoes)
-- Como usuário, desejo filtrar os personagens por **nome**, **gênero**, **espécie** e **status**, alguns filtros são enums, seja criativo.
-- Como usuário, desejo combinar varios filtros.
+#### Bibliotecas
+##### - mobx: ^2.1.3
+Utilizada para gerência de estados da aplicação.
+Em conjunto com: flutter_mobx e mobx_codegen.
+documentação: https://pub.dev/packages/mobx
 
-## Etapas
+##### - flutter_modular: ^5.0.3
+Utilizada para Injeção de depêndencias e controle de rotas da aplicação.
+Em conjunto com: modular_core, build_runner e modular_test.
+documentação: https://pub.dev/packages/flutter_modular
 
-#### 1 - Fazer um fork desse repositório
+##### - dio: ^4.0.6
+Utilizada para requisições https.
+documentação: https://pub.dev/packages/dio
 
-#### 2 - Criar um branch com o seu primeiro e último nome
+##### - pull_to_refresh: ^2.0.0
+Utilizada para recarregar a página com dados atualizados da API.
+documentação: https://pub.dev/packages/pull_to_refresh
+
+##### - ft_cli: ^0.1.8+8
+Utilizada para geração automática da estrutura do Clean Architecture. Foi desenvolvida por ex-colegas meus.
+documentação: https://pub.dev/packages/ft_cli
+
+## Como rodar
+
+Usando VSCode:
+- Deve ter instalado as versões citadas do Dart e do Flutter;
+- Deve ter instalado as extensões do Dart e do Flutter no VSCode;
+- Clonar o projeto;
+- Abrir o projeto no editor e rodar no terminal o comando:
 ```bash
-git checkout -b joao-silva
+flutter pub get
+```
+- Escolher o dispositivo: se for mobile, deve ter o emulador ou dispositivo físico conectados. Consulte rodando no terminal o comando:
+```bash
+flutter devices
+```
+- O projeto também é compatível com navegadores web.
+- Rodar no terminal o comando:
+```bash
+flutter run
 ```
 
-#### 3 - Escreva a documentação da sua aplicação
-Você deve, substituir o conteúdo do arquivo **README.md** e escrever a documentação da sua aplicação, com os seguintes tópicos:
-- **Projeto**: Descreva o projeto e como você o executou. Seja objetivo.
-- **Tecnologias**: Descreva quais tecnologias foram utilizadas, enumerando versões (se necessário) e os links para suas documentações, quais bibliotecas instalou e porque.
-- **Como compilar e rodar**: Descreva como compilar e rodar sua aplicação no Android e Web
-
-#### 4 - Faça uma Pull Request
-Após implementada a solução, crie uma [pull request](https://github.com/dorotech/flutter-test/pulls) com o seu projeto para esse repositório, avise o recrutador.
-
-## Critérios de Aceitação
-Para que seu teste tenha o mínimo necessário que atenda aos requisitos esperados, ele deve:
-- Atender ao que foi proposto no [Desafio](https://github.com/dorotech/flutter-test#Desafio).
-- Interfaces responsivas compatíveis com dispositivos Mobile e Web.
-- Especificar qual dispositivo foi utilizado para testar a aplicação.
-- Compatibilidade entre browsers.
-- Uso de alguma arquitetura para o código. Ex: MVVM, BLoC.
-- Utilizar padrões semânticos em mensagens de commit. (Gostamos do padrão de commits do repositório [AngularJS](http://karma-runner.github.io/3.0/dev/git-commit-msg.html))
-- Caso você nao consiga completar tudo e tenha algum receio, não se preocupe, iremos avaliar o que foi entregue, mesmo com pendências.
-- O diferencial para este desafio: layout, ux e ui, bem como implementação de boas práticas de segurança, performance e/ou estrutura.
-
-
-## Dicas e Informações Valiosas
-
-#### O que gostaríamos de ver em seu teste:
-- Convenção de nome em classes, objetos, variáveis, métodos e etc.
-- layout encantador
-- Faça commits regulares. Eles são melhores do que um commit gigantesco. Gostaríamos de ver commits organizados e padronizados, então capriche neles!
-- Animações, Sombras, Menus, componentes de Libs de UX implementados.
-- **Bônus 1** Dark Mode, implementação sendo um botão que mude o padrão de cores da pagina para escuro e claro com 1 click ou que siga a configuração do dispositivo do cliente.
-- **Bônus 2** Listagem de favoritos, com algum mecanismo de cache.
-- **Bônus 3** Outros filtros além dos sugeridos na descrição inicial
-- **Bônus 4** Testes automatizados
-
-**Observação:** Nenhum dos itens acima é obrigatório.
-
-#### O que o seu Teste não deve ter:
-- Saber que não foi você quem implementou o projeto.
-- Varias bibliotecas instaladas sem uso.
-- Falta de organização de código.
-- Falta de documentação.
-- Nome de variáveis sem sentido ou sem padrão de nomes.
-- Histórico de commits desorganizado e despadronizado.
-
-## Boa Sorte!!
+### Dispositivos testados
+- Smatphone Xiaomi mi 9t pro;
+- Emulador Android Nexus 5 com android 11;
+- Google Chrome;
+- Microsoft Edge.
