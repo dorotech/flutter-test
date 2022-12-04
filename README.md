@@ -48,7 +48,7 @@ flutter pub get
 ```
 - Escolher o dispositivo: se for mobile, deve ter o emulador ou dispositivo físico conectados. Consulte rodando no terminal o comando:
 ```bash
-flutter doctor
+flutter devices
 ```
 - O projeto também é compatível com navegadores web.
 - Rodar no terminal o comando:
