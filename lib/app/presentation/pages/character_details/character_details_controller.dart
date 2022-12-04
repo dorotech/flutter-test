@@ -30,6 +30,12 @@ abstract class _CharacterDetailsControllerBase with Store {
   @observable
   CharacterDto? characterDto;
 
+  @action
+  void setCharacterId(int value) => characterId = value;
+
+  @action
+  void setCharacterDto(CharacterDto value) => characterDto = value;
+
   Future<ResultPresentation> getCharacterById() async {
     try {
       loading = true;

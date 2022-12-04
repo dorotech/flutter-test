@@ -4,6 +4,7 @@ import 'package:rickandmorty/app/data/repositories/get_character_by_id/get_chara
 import 'package:rickandmorty/app/domain/usecases/get_character/get_character_imp_usecase.dart';
 import 'package:rickandmorty/app/domain/usecases/get_character_by_id/get_character_by_id_imp_usecase.dart';
 import 'package:rickandmorty/app/external/datasources/get_character/get_character_imp_datasource.dart';
+import 'package:rickandmorty/app/external/datasources/get_character_by_id/get_character_by_id_imp_datasource.dart';
 import 'package:rickandmorty/app/presentation/pages/character/character_controller.dart';
 import 'package:rickandmorty/app/presentation/pages/character/character_page.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/character_details_controller.dart';
@@ -23,12 +24,12 @@ class AppModule extends Module {
 
         // datasources
         $GetCharacterImpDatasource,
-        $GetCharacterImpDatasource,
+        $GetCharacterByIdImpDatasource,
 
         // controllers
         $ClientHttps,
         $CharacterController,
-        $CharacterDetailsController
+        $CharacterDetailsController,
       ];
 
   @override

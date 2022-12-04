@@ -41,6 +41,22 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$nameControllerAtom =
+      Atom(name: '_CharacterControllerBase.nameController', context: context);
+
+  @override
+  TextEditingController get nameController {
+    _$nameControllerAtom.reportRead();
+    return super.nameController;
+  }
+
+  @override
+  set nameController(TextEditingController value) {
+    _$nameControllerAtom.reportWrite(value, super.nameController, () {
+      super.nameController = value;
+    });
+  }
+
   late final _$nameQueryAtom =
       Atom(name: '_CharacterControllerBase.nameQuery', context: context);
 
@@ -89,6 +105,22 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     });
   }
 
+  late final _$isFilteredAtom =
+      Atom(name: '_CharacterControllerBase.isFiltered', context: context);
+
+  @override
+  bool get isFiltered {
+    _$isFilteredAtom.reportRead();
+    return super.isFiltered;
+  }
+
+  @override
+  set isFiltered(bool value) {
+    _$isFilteredAtom.reportWrite(value, super.isFiltered, () {
+      super.isFiltered = value;
+    });
+  }
+
   late final _$getCharactersAsyncAction =
       AsyncAction('_CharacterControllerBase.getCharacters', context: context);
 
@@ -99,6 +131,17 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
 
   late final _$_CharacterControllerBaseActionController =
       ActionController(name: '_CharacterControllerBase', context: context);
+
+  @override
+  void setIsFiltered(bool value) {
+    final _$actionInfo = _$_CharacterControllerBaseActionController.startAction(
+        name: '_CharacterControllerBase.setIsFiltered');
+    try {
+      return super.setIsFiltered(value);
+    } finally {
+      _$_CharacterControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void setPage(int value) {
@@ -127,9 +170,11 @@ mixin _$CharacterController on _CharacterControllerBase, Store {
     return '''
 loading: ${loading},
 listCharacters: ${listCharacters},
+nameController: ${nameController},
 nameQuery: ${nameQuery},
 page: ${page},
-paginationSize: ${paginationSize}
+paginationSize: ${paginationSize},
+isFiltered: ${isFiltered}
     ''';
   }
 }

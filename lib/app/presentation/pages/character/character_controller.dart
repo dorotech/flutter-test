@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
@@ -27,6 +28,9 @@ abstract class _CharacterControllerBase with Store {
   List<CharacterDto>? listCharacters;
 
   @observable
+  TextEditingController nameController = TextEditingController();
+
+  @observable
   String? nameQuery;
 
   @observable
@@ -34,6 +38,12 @@ abstract class _CharacterControllerBase with Store {
 
   @observable
   int paginationSize = 20;
+
+  @observable
+  bool isFiltered = false;
+
+  @action
+  void setIsFiltered(bool value) => isFiltered = value;
 
   @action
   void setPage(int value) => page = value;
@@ -51,6 +61,7 @@ abstract class _CharacterControllerBase with Store {
       return ResultPresentation(payload: listCharacters);
     } on RMException catch (e) {
       loading = false;
+      listCharacters = null;
       return ResultPresentation(error: e.error ?? '', message: e.message);
     }
   }

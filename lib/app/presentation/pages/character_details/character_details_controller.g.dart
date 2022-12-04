@@ -57,6 +57,32 @@ mixin _$CharacterDetailsController on _CharacterDetailsControllerBase, Store {
     });
   }
 
+  late final _$_CharacterDetailsControllerBaseActionController =
+      ActionController(
+          name: '_CharacterDetailsControllerBase', context: context);
+
+  @override
+  void setCharacterId(int value) {
+    final _$actionInfo = _$_CharacterDetailsControllerBaseActionController
+        .startAction(name: '_CharacterDetailsControllerBase.setCharacterId');
+    try {
+      return super.setCharacterId(value);
+    } finally {
+      _$_CharacterDetailsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setCharacterDto(CharacterDto value) {
+    final _$actionInfo = _$_CharacterDetailsControllerBaseActionController
+        .startAction(name: '_CharacterDetailsControllerBase.setCharacterDto');
+    try {
+      return super.setCharacterDto(value);
+    } finally {
+      _$_CharacterDetailsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
