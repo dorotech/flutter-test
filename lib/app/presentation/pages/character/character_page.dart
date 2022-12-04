@@ -27,45 +27,54 @@ class _CharacterPageState extends State<CharacterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Observer(builder: (context) {
-        return Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildSelectPaginationSize(),
-                _buildFilterButton(),
-              ],
-            ),
-            Expanded(
-              child: _controller.listCharacters != null
-                  ? Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount: _getPaginationSize(),
-                        itemBuilder: ((context, index) =>
-                            _buildCard(_controller.listCharacters![index])),
-                      ),
-                    )
-                  : _controller.loading == true
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : const Center(
-                          child: EmptyData(
-                            title: "Nenhum personagem encontrado!",
-                            message: "tente mudar os filtros.",
+        return SafeArea(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      width: 150,
+                      child: Image.asset('assets/rickandmorty_logo.png')),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildSelectPaginationSize(),
+                  _buildFilterButton(),
+                ],
+              ),
+              Expanded(
+                child: _controller.loading == true
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : _controller.listCharacters != null
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: _getPaginationSize(),
+                              itemBuilder: ((context, index) => _buildCard(
+                                  _controller.listCharacters![index])),
+                            ),
+                          )
+                        : const Center(
+                            child: EmptyData(
+                              title: "Nenhum personagem encontrado!",
+                              message: "tente mudar os filtros.",
+                            ),
                           ),
-                        ),
-            ),
-            Text("Tem vida aqui"),
-          ],
+              ),
+              _buildPagination(),
+            ],
+          ),
         );
       }),
     );
@@ -178,5 +187,36 @@ class _CharacterPageState extends State<CharacterPage> {
         ),
       );
     });
+  }
+
+  Widget _buildPagination() {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Página ${_controller.page}: Mostrando ${_controller.paginationSize} de ${_controller.listCharacters?.length} resultados',
+          ),
+          if (_controller.page > 1)
+            IconButton(
+              onPressed: () {
+                _controller.setPage(_controller.page - 1);
+                _controller.getCharacters();
+              },
+              icon: const Icon(Icons.arrow_back_ios),
+              iconSize: 20,
+            ),
+          IconButton(
+            onPressed: () {
+              _controller.setPage(_controller.page + 1);
+              _controller.getCharacters();
+            },
+            icon: const Icon(Icons.arrow_forward_ios),
+            iconSize: 20,
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -56,7 +56,7 @@ abstract class _CharacterControllerBase with Store {
     try {
       loading = true;
 
-      listCharacters = await _characterUsecase(nameQuery);
+      listCharacters = await _characterUsecase("page=$page&$nameQuery");
       loading = false;
       return ResultPresentation(payload: listCharacters);
     } on RMException catch (e) {
