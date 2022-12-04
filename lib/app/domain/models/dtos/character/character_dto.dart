@@ -8,6 +8,7 @@ import 'origin_dto.dart';
 class CharacterDto {
   int id;
   String name;
+  String species;
   String status;
   String type;
   String gender;
@@ -20,6 +21,7 @@ class CharacterDto {
   CharacterDto({
     required this.id,
     required this.name,
+    required this.species,
     required this.status,
     required this.type,
     required this.gender,
@@ -34,6 +36,7 @@ class CharacterDto {
   CharacterDto copyWith({
     int? id,
     String? name,
+    String? species,
     String? status,
     String? type,
     String? gender,
@@ -47,6 +50,7 @@ class CharacterDto {
     return CharacterDto(
       id: id ?? this.id,
       name: name ?? this.name,
+      species: species ?? this.species,
       status: status ?? this.status,
       type: type ?? this.type,
       gender: gender ?? this.gender,
@@ -64,6 +68,7 @@ class CharacterDto {
 
     result.addAll({'id': id});
     result.addAll({'name': name});
+    result.addAll({'species': species});
     result.addAll({'status': status});
     result.addAll({'type': type});
     result.addAll({'gender': gender});
@@ -81,6 +86,7 @@ class CharacterDto {
     return CharacterDto(
       id: map['id']?.toInt() ?? 0,
       name: map['name'] ?? '',
+      species: map['species'] ?? '',
       status: map['status'] ?? '',
       type: map['type'] ?? '',
       gender: map['gender'] ?? '',
@@ -100,7 +106,7 @@ class CharacterDto {
 
   @override
   String toString() {
-    return 'CharacterDto(id: $id, name: $name, status: $status, type: $type, gender: $gender, origin: $origin, location: $location, image: $image, episode: $episode, url: $url, created: $created)';
+    return 'CharacterDto(id: $id, name: $name, species: $species, status: $status, type: $type, gender: $gender, origin: $origin, location: $location, image: $image, episode: $episode, url: $url, created: $created)';
   }
 
   @override
@@ -110,6 +116,7 @@ class CharacterDto {
     return other is CharacterDto &&
         other.id == id &&
         other.name == name &&
+        other.species == species &&
         other.status == status &&
         other.type == type &&
         other.gender == gender &&
@@ -125,6 +132,7 @@ class CharacterDto {
   int get hashCode {
     return id.hashCode ^
         name.hashCode ^
+        species.hashCode ^
         status.hashCode ^
         type.hashCode ^
         gender.hashCode ^

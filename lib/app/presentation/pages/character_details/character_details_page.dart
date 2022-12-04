@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/character_details_controller.dart';
+import 'package:rickandmorty/app/presentation/pages/character_details/components/character_details_card.dart';
 
 class CharacterDetailsPage extends StatefulWidget {
   final CharacterDto character;
@@ -27,18 +28,41 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: _buildAppBar(),
       body: Observer(builder: (context) {
         return SafeArea(
-          child: Column(
-            children: [
-              Image.network(_controller.characterDto!.image),
-              Text(_controller.characterDto!.name),
-              Text(_controller.characterDto!.status)
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: CharacterDetailsCard(
+                      characterDto:
+                          _controller.characterDto ?? widget.character),
+                ),
+              ],
+            ),
           ),
         );
       }),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 24, top: 10, bottom: 10),
+        child: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(Icons.arrow_back_ios),
+          color: Colors.black,
+        ),
+      ),
+      elevation: 0,
+      centerTitle: true,
+      backgroundColor: Colors.transparent,
+      title: SizedBox(
+          width: 150, child: Image.asset('assets/rickandmorty_logo.png')),
     );
   }
 }

@@ -26,7 +26,7 @@ class FilterButton extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Text(
-                  'Filtrar',
+                  'Filters',
                   style:
                       TextStyle(color: isFiltered ? Colors.blue : Colors.black),
                 ),

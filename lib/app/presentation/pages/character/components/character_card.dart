@@ -45,7 +45,7 @@ class CharacterCard extends StatelessWidget {
                           children: [
                             StatusBadge(
                               background: _getBadgeColor().withOpacity(0.1),
-                              text: _translateStatus(characterDto.status),
+                              text: characterDto.status,
                               textColor: _getBadgeColor(),
                               icon: 'assets/status_icon.png',
                               iconColor: _getBadgeColor(),
@@ -97,17 +97,6 @@ class CharacterCard extends StatelessWidget {
         return Colors.red;
       default:
         return Colors.grey;
-    }
-  }
-
-  String _translateStatus(String status) {
-    switch (characterDto.status) {
-      case "Alive":
-        return "Vivo";
-      case "Dead":
-        return "Morto";
-      default:
-        return "Desconhecido";
     }
   }
 }

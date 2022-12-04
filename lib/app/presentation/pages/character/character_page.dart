@@ -122,7 +122,7 @@ class _CharacterPageState extends State<CharacterPage> {
       padding: const EdgeInsets.all(15),
       child: Row(
         children: [
-          Text("Resultados:"),
+          const Text("Results:"),
           const SizedBox(
             width: 10,
           ),
@@ -197,7 +197,7 @@ class _CharacterPageState extends State<CharacterPage> {
         children: [
           Expanded(
             child: Text(
-              'Página ${_controller.page}: Mostrando ${_controller.paginationSize} de ${_controller.listCharacters?.length} resultados',
+              'Page ${_controller.page}: Showing ${_controller.paginationSize} of ${_controller.listCharacters?.length} results',
             ),
           ),
           if (_controller.page > 1)
