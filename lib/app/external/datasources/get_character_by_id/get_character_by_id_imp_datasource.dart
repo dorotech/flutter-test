@@ -20,6 +20,6 @@ class GetCharacterByIdImpDatasource implements GetCharacterByIdDatasource {
     String endpoint = '/character/$id';
     final result = await _clientHttps.get(endpoint);
 
-    return CharacterDto.fromMap(result as Map<String, dynamic>);
+    return CharacterDto.fromMap(result.data);
   }
 }

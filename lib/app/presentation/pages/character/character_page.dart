@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
 import 'package:rickandmorty/app/presentation/components/empty_data_widget.dart';
 import 'package:rickandmorty/app/presentation/components/filter_button.dart';
@@ -17,6 +18,9 @@ class CharacterPage extends StatefulWidget {
 
 class _CharacterPageState extends State<CharacterPage> {
   final _controller = Modular.get<CharacterController>();
+  final RefreshController _refreshController = RefreshController(
+    initialRefreshStatus: RefreshStatus.idle,
+  );
 
   @override
   void initState() {
@@ -66,12 +70,20 @@ class _CharacterPageState extends State<CharacterPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16),
                             ),
-                            child: ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              itemCount: _getPaginationSize(),
-                              itemBuilder: ((context, index) => _buildCard(
-                                  _controller.listCharacters![index])),
+                            child: SmartRefresher(
+                              header: const WaterDropMaterialHeader(
+                                backgroundColor: Colors.white,
+                                color: Colors.blueAccent,
+                              ),
+                              controller: _refreshController,
+                              onRefresh: () => _onRefresh(context),
+                              child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemCount: _getPaginationSize(),
+                                itemBuilder: ((context, index) => _buildCard(
+                                    _controller.listCharacters![index])),
+                              ),
                             ),
                           )
                         : const SingleChildScrollView(
@@ -454,5 +466,10 @@ class _CharacterPageState extends State<CharacterPage> {
         _controller.speciesQuery == null) {
       _controller.setIsFiltered(false);
     }
+  }
+
+  void Function()? _onRefresh(BuildContext context) {
+    _controller.getCharacters();
+    _refreshController.refreshCompleted();
   }
 }

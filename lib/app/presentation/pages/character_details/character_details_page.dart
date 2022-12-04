@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rickandmorty/app/domain/models/dtos/character/character_dto.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/character_details_controller.dart';
 import 'package:rickandmorty/app/presentation/pages/character_details/components/character_details_card.dart';
@@ -18,6 +19,9 @@ class CharacterDetailsPage extends StatefulWidget {
 
 class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
   final _controller = Modular.get<CharacterDetailsController>();
+  final RefreshController _refreshController = RefreshController(
+    initialRefreshStatus: RefreshStatus.idle,
+  );
 
   @override
   void initState() {
@@ -32,16 +36,27 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
       appBar: _buildAppBar(),
       body: Observer(builder: (context) {
         return SafeArea(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: CharacterDetailsCard(
-                      characterDto:
-                          _controller.characterDto ?? widget.character),
-                ),
-              ],
+          child: SmartRefresher(
+            header: const WaterDropMaterialHeader(
+              backgroundColor: Colors.white,
+              color: Colors.blueAccent,
+            ),
+            controller: _refreshController,
+            onRefresh: () => _onRefresh(context),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: !_controller.loading
+                        ? CharacterDetailsCard(
+                            characterDto: _controller.characterDto!)
+                        : const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -65,5 +80,10 @@ class _CharacterDetailsPageState extends State<CharacterDetailsPage> {
       title: SizedBox(
           width: 150, child: Image.asset('assets/rickandmorty_logo.png')),
     );
+  }
+
+  void Function()? _onRefresh(BuildContext context) {
+    _controller.getCharacterById();
+    _refreshController.refreshCompleted();
   }
 }

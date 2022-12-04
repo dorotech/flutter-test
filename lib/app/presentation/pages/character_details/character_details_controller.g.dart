@@ -57,6 +57,15 @@ mixin _$CharacterDetailsController on _CharacterDetailsControllerBase, Store {
     });
   }
 
+  late final _$getCharacterByIdAsyncAction = AsyncAction(
+      '_CharacterDetailsControllerBase.getCharacterById',
+      context: context);
+
+  @override
+  Future<ResultPresentation> getCharacterById() {
+    return _$getCharacterByIdAsyncAction.run(() => super.getCharacterById());
+  }
+
   late final _$_CharacterDetailsControllerBaseActionController =
       ActionController(
           name: '_CharacterDetailsControllerBase', context: context);

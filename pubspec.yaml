@@ -27,6 +27,7 @@ dependencies:
 
   # Client Http
   dio: ^4.0.6
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   mobx_codegen: ^2.1.1

@@ -36,6 +36,7 @@ abstract class _CharacterDetailsControllerBase with Store {
   @action
   void setCharacterDto(CharacterDto value) => characterDto = value;
 
+  @action
   Future<ResultPresentation> getCharacterById() async {
     try {
       loading = true;
@@ -44,6 +45,7 @@ abstract class _CharacterDetailsControllerBase with Store {
       return ResultPresentation(payload: characterDto);
     } on RMException catch (e) {
       loading = false;
+      characterDto = null;
       return ResultPresentation(error: e.error ?? '', message: e.message);
     }
   }
