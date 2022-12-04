@@ -31,8 +31,8 @@ class FilterButton extends StatelessWidget {
                       TextStyle(color: isFiltered ? Colors.blue : Colors.black),
                 ),
               ),
-              ImageIcon(
-                const AssetImage('assets/filter_icon.png'),
+              Icon(
+                Icons.filter_list_outlined,
                 color: isFiltered ? Colors.blue : Colors.black,
               ),
             ],
