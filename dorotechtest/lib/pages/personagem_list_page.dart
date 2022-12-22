@@ -15,8 +15,12 @@ class _PersonagemListPageState extends State<PersonagemListPage> {
   void initState() {
     super.initState();
     // you can uncomment this to get all batman movies when the page is loaded
-    // Provider.of<PersongemListViewModel>(context, listen: false)
-    //     .fetchPersonagens('');
+    Provider.of<PersongemListViewModel>(context, listen: false)
+        .fetchPersonagens('');
+  }
+
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -44,8 +48,8 @@ class _PersonagemListPageState extends State<PersonagemListPage> {
                       _controller.clear();
                     }
                   },
-                  style: TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
                       hintText: "Search",
                       hintStyle: TextStyle(color: Colors.white),
                       border: InputBorder.none),

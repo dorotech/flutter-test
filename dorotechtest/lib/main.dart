@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(backgroundColor: Colors.black),
+        theme: ThemeData(backgroundColor: Colors.black26),
         debugShowCheckedModeBanner: false,
         title: "rick and morty",
         home: ChangeNotifierProvider(
