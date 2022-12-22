@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import '../view models/personagem_view_model.dart';
 
 class PersonagemDetalhesPage extends StatefulWidget {
-  final PersonagemModel personagem;
-  PersonagemDetalhesPage({Key? key, required this.personagem})
-      : super(key: key);
+  // final PersonagemModel personagem;
+  PersonagemDetalhesPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _PersonagemDetalhesPageState createState() => _PersonagemDetalhesPageState();

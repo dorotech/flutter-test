@@ -15,11 +15,20 @@ class PersonagemList extends StatelessWidget {
   Widget build(BuildContext context) {
     // List<PersonagemModel> tabela = <PersonagemModel>[];
 
-    mostrarDetalhes(PersonagemModel personagem) {
+    // mostrarDetalhes(PersonagemModel personagem) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (_) => PersonagemDetalhesPage(personagem: personagem),
+    //     ),
+    //   );
+    // }
+
+    detalhesPage() {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => PersonagemDetalhesPage(personagem: personagem),
+          builder: (_) => PersonagemDetalhesPage(),
         ),
       );
     }
@@ -45,7 +54,7 @@ class PersonagemList extends StatelessWidget {
           subtitle: Text('status:  ${persona.personagem.status!}'),
           onLongPress: () {
             onTap:
-            () => mostrarDetalhes(persona.personagem);
+            () => detalhesPage();
           },
         );
       },
