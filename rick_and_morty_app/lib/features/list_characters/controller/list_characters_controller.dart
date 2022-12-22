@@ -11,6 +11,7 @@ class ListCharactersController {
     String data = await listCharactersRepository.getListChatactersRepository();
     try {
       listCharacter = listCharacterFromJson(data);
+      return listCharacter;
     } catch (e) {
       if (kDebugMode) print(e.toString());
       throw DefalutStrings.unknownError;
