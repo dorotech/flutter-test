@@ -14,7 +14,7 @@ class CardCharacter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 8,
       child: Column(
         children: [
           SizedBox(

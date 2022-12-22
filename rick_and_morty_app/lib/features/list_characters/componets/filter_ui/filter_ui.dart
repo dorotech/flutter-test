@@ -132,7 +132,11 @@ class _FilterUiState extends State<FilterUi> {
           style: ElevatedButton.styleFrom(backgroundColor: this.gender == gender ? Colors.blue : Colors.grey),
           onPressed: () {
             setState(() {
-              this.gender = gender;
+              if (this.gender == gender) {
+                this.gender = null;
+              } else {
+                this.gender = gender;
+              }
             });
           },
           child: Text(genderValues.reverse?[gender] ?? "")),
@@ -158,7 +162,11 @@ class _FilterUiState extends State<FilterUi> {
           style: ElevatedButton.styleFrom(backgroundColor: this.species == species ? Colors.blue : Colors.grey),
           onPressed: () {
             setState(() {
-              this.species = species;
+              if (this.species == species) {
+                this.species = null;
+              } else {
+                this.species = species;
+              }
             });
           },
           child: Text(speciesValues.reverse?[species] ?? "")),
@@ -185,7 +193,11 @@ class _FilterUiState extends State<FilterUi> {
           style: ElevatedButton.styleFrom(backgroundColor: this.status == status ? Colors.blue : Colors.grey),
           onPressed: () {
             setState(() {
-              this.status = status;
+              if (this.status == status) {
+                this.status = null;
+              } else {
+                this.status = status;
+              }
             });
           },
           child: Text(statusValues.reverse?[status] ?? "")),

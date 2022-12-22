@@ -1,10 +1,16 @@
-import '../data.dart';
 import 'dart:convert';
+
+import 'package:hive/hive.dart';
+
+import '../data.dart';
+
+part 'character.g.dart';
 
 Character characterFromJson(String str) => Character.fromJson(json.decode(str));
 
 String characterToJson(Character data) => json.encode(data.toJson());
 
+@HiveType(typeId: 1)
 class Character {
   Character({
     required this.id,
@@ -21,18 +27,30 @@ class Character {
     this.created,
   });
 
+  @HiveField(0)
   int id;
-  String? name;
-  Status? status;
-  Species? species;
-  String? type;
-  Gender? gender;
-  Location? origin;
-  Location? location;
-  String? image;
-  List<String>? episode;
-  String? url;
+  @HiveField(1)
   DateTime? created;
+  @HiveField(2)
+  String? name;
+  @HiveField(3)
+  Status? status;
+  @HiveField(4)
+  Species? species;
+  @HiveField(5)
+  String? type;
+  @HiveField(6)
+  Gender? gender;
+  @HiveField(7)
+  Location? origin;
+  @HiveField(8)
+  Location? location;
+  @HiveField(9)
+  String? image;
+  @HiveField(10)
+  List<String>? episode;
+  @HiveField(11)
+  String? url;
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
         id: json["id"],
@@ -63,4 +81,12 @@ class Character {
         "url": url,
         "created": created == null ? null : created!.toIso8601String(),
       };
+}
+
+@HiveType(typeId: 3)
+class ListCharacterLovers {
+  ListCharacterLovers({this.listCharacter});
+
+  @HiveField(0)
+  List<Character>? listCharacter;
 }
