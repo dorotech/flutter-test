@@ -1,16 +1,26 @@
 # dorotechtest
 
-A new Flutter project.
+Teste em Flutter
+
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+para dar build no projeto execute os coandos 
+ -- flutter pub get 
+ -- flutter run 
+ * indicar qual plataforma usar
+ 
 
-A few resources to get you started if this is your first Flutter project:
+## Projeto 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Fiz  a aplicação no padrão MVVM , para  que fosse mostrado em tela os dados recolhidos de uma API Rest, 
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Esse modelo tras informações cujo podemos modificar as parte do código ou trazer melhorias para o mesmo
+
+### Tecn
+
+utilizei HTTP e PROVIDER de pacotes do Flutter.
+
+
+
+

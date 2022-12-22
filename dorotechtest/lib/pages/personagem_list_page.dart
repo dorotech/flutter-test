@@ -19,7 +19,7 @@ class _PersonagemListPageState extends State<PersonagemListPage> {
     loadingWidget();
     // you can uncomment this to get all batman movies when the page is loaded
     Provider.of<PersongemListViewModel>(context, listen: false)
-        .fetchPersonagens('');
+        .fetchPersonagens('name');
   }
 
   void dispose() {
