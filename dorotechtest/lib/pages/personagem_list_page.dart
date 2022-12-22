@@ -16,6 +16,7 @@ class _PersonagemListPageState extends State<PersonagemListPage> {
   @override
   void initState() {
     super.initState();
+    loadingWidget();
     // you can uncomment this to get all batman movies when the page is loaded
     Provider.of<PersongemListViewModel>(context, listen: false)
         .fetchPersonagens('');
@@ -29,6 +30,11 @@ class _PersonagemListPageState extends State<PersonagemListPage> {
   Widget build(BuildContext context) {
     final personagemListViewModel =
         Provider.of<PersongemListViewModel>(context);
+
+    void openScreen() {
+      Navigator.pushReplacementNamed(context, 'second',
+          arguments: {"name": _controller.value.text});
+    }
 
     return Scaffold(
         appBar: AppBar(title: Text("Personagens")),

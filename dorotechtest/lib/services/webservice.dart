@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Webservice with ChangeNotifier {
-  int _page = 1;
+  int? _page;
 
   final List<PersonagemModel> _personagemService = [];
 
@@ -18,16 +18,17 @@ class Webservice with ChangeNotifier {
       final body = jsonDecode(response.body);
       final Iterable json = body['results'];
       final results = jsonDecode(response.body)['info'];
-      print(' resutsssss ${results}');
+      // print(' resutsssss ${results}');
 
-      // for (var i = 0; i < results.length; i++) {
-      //   _personagemService.add(PersonagemModel.fromJson(results[i]));
-      //   // return json
-      //   //     .map((personagem) => PersonagemModel.fromJson(personagem))
-      //   //     .toList();
-      // }
+      for (var i = 0; i < results.length; i++) {
+        print('xxxxxxxxxxxxxxx :  ${results}');
+        // _personagemService.add(PersonagemModel.fromJson(results[i]));
+        // return json
+        //     .map((personagem) => PersonagemModel.fromJson(personagem))
+        //     .toList();
+      }
       // _page++;
-      // notifyListeners();
+      notifyListeners();
       // print(json);
       return json
           .map((personagem) => PersonagemModel.fromJson(personagem))

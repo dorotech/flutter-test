@@ -1,10 +1,10 @@
 import 'package:dorotechtest/models/personagem.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import '../view models/personagem_view_model.dart';
 
 class PersonagemDetalhesPage extends StatefulWidget {
-  PersonagemModel personagem;
-
+  final PersonagemModel personagem;
   PersonagemDetalhesPage({Key? key, required this.personagem})
       : super(key: key);
 
@@ -17,7 +17,7 @@ class _PersonagemDetalhesPageState extends State<PersonagemDetalhesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.personagem.name!),
+        title: Text('widget.personagem'),
       ),
       body: Padding(
         padding: EdgeInsets.all(24),
@@ -30,12 +30,12 @@ class _PersonagemDetalhesPageState extends State<PersonagemDetalhesPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    child: Image.network(widget.personagem.image!),
+                    child: Image.network('widget.personagem.image!'),
                     width: 50,
                   ),
                   Container(width: 10),
                   Text(
-                    widget.personagem.status!,
+                    'widget.personagem.status!',
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w600,

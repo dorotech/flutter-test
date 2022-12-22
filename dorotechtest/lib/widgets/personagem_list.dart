@@ -13,7 +13,7 @@ class PersonagemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabela = PersonagemModel({});
+    // List<PersonagemModel> tabela = <PersonagemModel>[];
 
     mostrarDetalhes(PersonagemModel personagem) {
       Navigator.push(
@@ -44,7 +44,8 @@ class PersonagemList extends StatelessWidget {
           title: Text('Nome: ${persona.personagem.name!}'),
           subtitle: Text('status:  ${persona.personagem.status!}'),
           onLongPress: () {
-            mostrarDetalhes(tabela);
+            onTap:
+            () => mostrarDetalhes(persona.personagem);
           },
         );
       },

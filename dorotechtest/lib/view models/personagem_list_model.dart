@@ -10,7 +10,6 @@ class PersongemListViewModel extends ChangeNotifier {
     final results = await Webservice().fetchMovies(item);
     personagens =
         results!.map((item) => PersonagemViewModel(personagem: item)).toList();
-    print(personagens);
     notifyListeners();
   }
 }
