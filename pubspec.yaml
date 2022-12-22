@@ -40,6 +40,7 @@ dependencies:
   mobx: ^2.0.6+1
   flutter_mobx: ^2.0.4
   http: ^0.13.4
+  number_pagination: ^0.0.3+2
 
 dev_dependencies:
   flutter_test:
