@@ -13,7 +13,7 @@ class RickAndMortyRepositoryImp implements RickAndMortyRepository {
   Future<dynamic> getAllCharacters() async {
     try {
       final httpResponse = await httpClient.request(
-        Api.getCharacters(1),
+        Api.getCharacters(),
         method: 'get',
       );
 

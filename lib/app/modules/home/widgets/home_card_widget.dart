@@ -30,8 +30,9 @@ class _HomeCardState extends State<HomeCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return Scaffold(
+    return Observer(
+      builder: (_) {
+        return Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(56.0),
             child: AppbarWidget(),
@@ -72,7 +73,9 @@ class _HomeCardState extends State<HomeCard> {
                 ),
               )
             ],
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }

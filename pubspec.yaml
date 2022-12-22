@@ -40,7 +40,6 @@ dependencies:
   mobx: ^2.0.6+1
   flutter_mobx: ^2.0.4
   http: ^0.13.4
-  cached_network_image: ^3.2.1
 
 dev_dependencies:
   flutter_test:

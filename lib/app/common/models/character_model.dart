@@ -5,8 +5,8 @@ class CharacterModel {
   String? type;
   String? gender;
   String? species;
-  Map<String, dynamic>? origin;
-  Map<String, dynamic>? location;
+  String? origin;
+  String? location;
   String? image;
 
   CharacterModel({
@@ -29,8 +29,8 @@ class CharacterModel {
       species: json["species"],
       type: json["type"],
       gender: json["gender"],
-      origin: json["origin"],
-      location: json["location"],
+      origin: json["origin"]["name"],
+      location: json["location"]["name"],
       image: json["image"],
     );
   }
