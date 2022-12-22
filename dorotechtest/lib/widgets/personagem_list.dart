@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:dorotechtest/models/personagem.dart';
+import 'package:dorotechtest/pages/detalhes_personagem_page.dart';
+import 'package:dorotechtest/view%20models/personagem_list_model.dart';
 import 'package:dorotechtest/view%20models/personagem_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PersonagemList extends StatelessWidget {
   final List<PersonagemViewModel> personagem;
@@ -7,7 +13,18 @@ class PersonagemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    final tabela = PersonagemModel({});
+
+    mostrarDetalhes(PersonagemModel personagem) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PersonagemDetalhesPage(personagem: personagem),
+        ),
+      );
+    }
+
+    return ListView.separated(
       itemCount: this.personagem.length,
       itemBuilder: (context, index) {
         final persona = this.personagem[index];
@@ -26,8 +43,12 @@ class PersonagemList extends StatelessWidget {
           ),
           title: Text('Nome: ${persona.personagem.name!}'),
           subtitle: Text('status:  ${persona.personagem.status!}'),
+          onLongPress: () {
+            mostrarDetalhes(tabela);
+          },
         );
       },
+      separatorBuilder: (_, ___) => Divider(),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:dorotechtest/models/personagem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class Webservice {
+class Webservice with ChangeNotifier {
   int _page = 1;
 
   final List<PersonagemModel> _personagemService = [];
@@ -17,7 +17,8 @@ class Webservice {
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final Iterable json = body['results'];
-      // final results = jsonDecode(response.body)['results'];
+      final results = jsonDecode(response.body)['info'];
+      print(' resutsssss ${results}');
 
       // for (var i = 0; i < results.length; i++) {
       //   _personagemService.add(PersonagemModel.fromJson(results[i]));
@@ -27,7 +28,7 @@ class Webservice {
       // }
       // _page++;
       // notifyListeners();
-      print(json);
+      // print(json);
       return json
           .map((personagem) => PersonagemModel.fromJson(personagem))
           .toList();

@@ -1,3 +1,5 @@
+import 'package:dorotechtest/models/personagem.dart';
+import 'package:dorotechtest/pages/detalhes_personagem_page.dart';
 import 'package:dorotechtest/view%20models/personagem_list_model.dart';
 import 'package:dorotechtest/widgets/personagem_list.dart';
 import 'package:flutter/material.dart';

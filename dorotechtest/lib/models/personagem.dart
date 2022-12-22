@@ -12,7 +12,7 @@ class PersonagemModel {
   String? _url;
   String? _created;
 
-  PersonagemModel(
+  PersonagemModel(Map map,
       {int? id,
       String? name,
       String? status,
