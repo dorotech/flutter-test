@@ -1,4 +1,9 @@
 import '../data.dart';
+import 'dart:convert';
+
+Character characterFromJson(String str) => Character.fromJson(json.decode(str));
+
+String characterToJson(Character data) => json.encode(data.toJson());
 
 class Character {
   Character({
