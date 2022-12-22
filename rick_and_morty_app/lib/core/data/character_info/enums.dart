@@ -1,14 +1,26 @@
-enum Gender { male, female, unknow }
+enum Gender { male, female, unknow, genderless }
 
-final genderValues = EnumValues({"Female": Gender.female, "Male": Gender.male, "unknown": Gender.unknow});
+final genderValues = EnumValues({
+  "Female": Gender.female,
+  "Male": Gender.male,
+  "unknown": Gender.unknow,
+  "genderless": Gender.genderless,
+});
 
 enum Species { human, alien }
 
-final speciesValues = EnumValues({"Alien": Species.alien, "Human": Species.human});
+final speciesValues = EnumValues({
+  "Alien": Species.alien,
+  "Human": Species.human,
+});
 
 enum Status { alive, unknow, dead }
 
-final statusValues = EnumValues({"Alive": Status.alive, "Dead": Status.dead, "unknown": Status.unknow});
+final statusValues = EnumValues({
+  "Alive": Status.alive,
+  "Dead": Status.dead,
+  "unknown": Status.unknow,
+});
 
 class EnumValues<T> {
   Map<String, T> map;

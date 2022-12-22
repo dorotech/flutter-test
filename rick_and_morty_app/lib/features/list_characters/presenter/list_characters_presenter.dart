@@ -4,10 +4,17 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:rick_and_morty_app/core/core.dart';
 import 'package:rick_and_morty_app/features/list_characters/componets/componets.dart';
 import 'package:rick_and_morty_app/features/list_characters/controller/controller.dart';
+import 'package:rick_and_morty_app/features/list_characters/data/data.dart';
 import 'package:rick_and_morty_app/features/list_characters/presenter/ui/ui.dart';
 
-class ListCharactersPresenter extends StatelessWidget {
+class ListCharactersPresenter extends StatefulWidget {
   ListCharactersPresenter({super.key});
+
+  @override
+  State<ListCharactersPresenter> createState() => _ListCharactersPresenterState();
+}
+
+class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
   final ListCharactersController _controller = ListCharactersController();
 
   @override
@@ -24,8 +31,17 @@ class ListCharactersPresenter extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () {
-              Navigator.push(context, CupertinoPageRoute(builder: (_) => FilterUi()));
+            onPressed: () async {
+              dynamic filter = await Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (_) => FilterUi(filterInputs: _controller.filterInputs),
+                ),
+              );
+              if (filter is FilterInputs) {
+                _controller.filterInputs = filter;
+              }
+              setState(() {});
             },
             icon: const Icon(MdiIcons.magnify),
           ),
