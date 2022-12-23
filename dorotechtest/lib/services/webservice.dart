@@ -5,13 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class Webservice with ChangeNotifier {
-  int? _page;
+  String? _page;
 
   final List<PersonagemModel> _personagemService = [];
 
   List<PersonagemModel> get personagemService => _personagemService;
 
-  Future<List<PersonagemModel>?> fetchMovies(_page) async {
+  Future<List<PersonagemModel>?> fetchPersonagem(String? _page) async {
     String url = "https://rickandmortyapi.com/api/character/?page=$_page";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {

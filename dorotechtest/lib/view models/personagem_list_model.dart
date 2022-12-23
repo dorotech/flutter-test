@@ -6,8 +6,8 @@ import 'package:flutter/cupertino.dart';
 class PersongemListViewModel extends ChangeNotifier {
   List<PersonagemViewModel> personagens = <PersonagemViewModel>[];
 
-  Future<void> fetchPersonagens(String item) async {
-    final results = await Webservice().fetchMovies(item);
+  Future<List<PersonagemModel>?> fetchPersonagens(String? item) async {
+    final results = await Webservice().fetchPersonagem(item);
     personagens =
         results!.map((item) => PersonagemViewModel(personagem: item)).toList();
     notifyListeners();

@@ -1,54 +1,48 @@
 import 'package:dorotechtest/models/personagem.dart';
 import 'package:flutter/material.dart';
 
-import '../view models/personagem_view_model.dart';
-
-class PersonagemDetalhesPage extends StatefulWidget {
-  // final PersonagemModel personagem;
-  PersonagemDetalhesPage({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  _PersonagemDetalhesPageState createState() => _PersonagemDetalhesPageState();
-}
-
-class _PersonagemDetalhesPageState extends State<PersonagemDetalhesPage> {
+class DetailPage extends StatelessWidget {
+  final PersonagemModel user;
+  DetailPage(this.user);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('widget.personagem'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(24),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    child: Image.network('widget.personagem.image!'),
-                    width: 50,
-                  ),
-                  Container(width: 10),
-                  Text(
-                    'widget.personagem.status!',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -1,
-                      color: Colors.grey[800],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        appBar: AppBar(
+          title: Text(user.name!),
         ),
+        body: userDetails());
+  }
+
+  userDetails() {
+    return Container(
+      padding: new EdgeInsets.all(32.0),
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.cover, image: NetworkImage(user.image!)),
+                borderRadius: BorderRadius.circular(6)),
+            width: 120,
+            height: 100,
+          ),
+          ListTile(
+            title:
+                Text(user.name!, style: TextStyle(fontWeight: FontWeight.w500)),
+            subtitle: Text(user.status!),
+            leading: Icon(Icons.person, color: Colors.blue),
+            trailing: Text(user.species!),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.male, color: Colors.blue),
+              ),
+              Text(user.gender!)
+            ],
+          ),
+        ],
       ),
     );
   }
