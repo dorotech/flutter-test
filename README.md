@@ -1,74 +1,45 @@
-# Desafio para Flutter Developer na DoroTech
+### Projeto
+OBS: Devido ao prazo em que tive para entregar o projeto, o aplicativo ficou bem corrido, com possibilidades de melhoria, especialmente com relação ao visual das telas (comecei fazendo pequenos pedaços em intervalos no trabalho, e foquei depois das 18 até o horário limite 23:59).
+Algumas ideias deixarei com (*) representando ações que foram afetadas por causa da entrega
 
-Somos uma empresa com clientes que atuam em vários segmentos do mercado, com diferentes tecnologias, culturas e desafios.
+#### Como padrão, comecei o desenvolvimento criando as pastas que pensei necessárias para o projeto quando fosse inicializa-lo, são essas:
 
-Gostamos de compor nossos times com profissionais multidisciplinares, que tenham alta capacidade de aprendizado, sejam detalhistas, resilientes, questionadores e curiosos.
-Você, como **Flutter Developer**, será o responsável por implementar, dar manutenção, aplicar correções e propor soluções em projetos de software.
+- **/assets**: De inicio criei a pasta aqui para deixar vários arquivos SVG afim de deixar o aplicativo com uma cara moderna e amigável(*)
+- **/core**: Aonde ficarão objetos necessários para a aplicação, como:
+* os dados do aplicativo; 
+* arquivos de cache; 
+* algumas strigns usadas em vários lugares na aplicação (Ideal seria deixar um arquivo em core com as strings mais utilizadas e um arquivo especifico em cada feature (*))
+* Funções e Widgets que podem ser usados em toda a aplicação
+- **/features**: Aqui estão todas as telas na aplicação, as pastas padrões são:
+* /controller: com os controllers da das telas responsáveis pelo gerenciamento de estado das telas
+* /repository: arquivos para fazer acesso aos dados que serão consumidos pelos controller e presenter
+* /presenter: telas e widgets em si
+* algumas telas podem ter mais pastas, como:
+* - /data: aonde ficarão objetos que somente aquele recurso deve consumir
+* - /componets: local aonde podem ficar alguns widgets ou recursos mais genéricos para a feature (*)
 
-## Orientações
-Para executar o desafio de **Flutter Developer**, você **deverá utilizar framework Flutter e seguir suas boas práticas**, seguindo o [passo a passo](https://github.com/dorotech/flutter-test#etapas) para a execução, atendendo aos [critérios de aceitação](https://github.com/dorotech/flutter-test#critérios-de-aceitação).
+#### test
+- **/test** a pasta de test deve seguir as mesmas estruturas que a pasta de produção (/lib)]
 
-## Desafio
-Nossa equipe é apaixonada por **Rick and Morty**, o seu desafio será criar uma aplicação utilizando a API pública da série [https://rickandmortyapi.com/](https://rickandmortyapi.com/), para exibir a lista de  personagens.
-Veja a documentação [https://rickandmortyapi.com/documentation/#rest](https://rickandmortyapi.com/documentation/#rest).
+Com as pastas criadas comecei a implementa-las, começando pela /core, com as classes que seriam necessárias para a aplicação
+Em segundo momento, busquei criar algumas classes abstratas que seriam uteis em breve já criando seus mocks para testes
+Em seguida, comecei desenvolvendo os testes da classe de controller, garantindo que suas funções estejam fazendo suas responsabilidades
+Após os testes, comecei a realizar a criação das telas e testar as classes repositories na produção, felizmente funcionaram de primeira.
 
-Os requisitos da aplicação:
+Para realizar o desafio tive a ajuda de algumas bibliotecas que costumo utilizar:
+- Hive: Para cache, consigo salvar classes inteiras em cache de forma fácil, a utilizo muito para criar micro-frontends no meu trabalho.
+- MobX: Gerencimento de estado das telas, fiz a implementação de forma rápida, sem utilizar muitos de seus recursos, poderia ter ficado melhor, em alguns lugares utilizei também o setState(*)
+- http: Realizar conexões com a API
+- path_provide: Utilizada para obter o diretório da aplicação no device para o Hive salvar a os objetos da forma como implementei 
+- connectivity_plus: Verificar o device está com dados móveis ou Wi-Fi ativo
+- material_design_icons_flutter: Icones
+- test, mockito, faker: Auxiliar nos testes.
+- flutter_native_splash: Criar uma tela nativa de splash screen básica
+- flutter_launcher_icons: Adicionar logo no ícone ao aplicativo
 
-- Como usuário, desejo visualizar na página inicial, uma lista de 20 personagens incialmente, contendo **foto**, **nome** e **status**, com o tamanho da paginação sendo dinamica, podendo ser selecionando, 5, 10 ou 20 itens por vez.
-- Como usuário, desejo clicar em um personagem da lista, para visualizar informações detalhadas. (seja criativo a api contem diversas informaçoes)
-- Como usuário, desejo filtrar os personagens por **nome**, **gênero**, **espécie** e **status**, alguns filtros são enums, seja criativo.
-- Como usuário, desejo combinar varios filtros.
+### Para compilar 
+- **web** pode-se user flutter run -d chrome
+- **android** deixarei um apk na pasta raiz, caso não execute, pode rodar com flutter run --release 
+ 
+Versão do Flutter utilizada: Flutter 3.3.10
 
-## Etapas
-
-#### 1 - Fazer um fork desse repositório
-
-#### 2 - Criar um branch com o seu primeiro e último nome
-```bash
-git checkout -b joao-silva
-```
-
-#### 3 - Escreva a documentação da sua aplicação
-Você deve, substituir o conteúdo do arquivo **README.md** e escrever a documentação da sua aplicação, com os seguintes tópicos:
-- **Projeto**: Descreva o projeto e como você o executou. Seja objetivo.
-- **Tecnologias**: Descreva quais tecnologias foram utilizadas, enumerando versões (se necessário) e os links para suas documentações, quais bibliotecas instalou e porque.
-- **Como compilar e rodar**: Descreva como compilar e rodar sua aplicação no Android e Web
-
-#### 4 - Faça uma Pull Request
-Após implementada a solução, crie uma [pull request](https://github.com/dorotech/flutter-test/pulls) com o seu projeto para esse repositório, avise o recrutador.
-
-## Critérios de Aceitação
-Para que seu teste tenha o mínimo necessário que atenda aos requisitos esperados, ele deve:
-- Atender ao que foi proposto no [Desafio](https://github.com/dorotech/flutter-test#Desafio).
-- Interfaces responsivas compatíveis com dispositivos Mobile e Web.
-- Especificar qual dispositivo foi utilizado para testar a aplicação.
-- Compatibilidade entre browsers.
-- Uso de alguma arquitetura para o código. Ex: MVVM, BLoC.
-- Utilizar padrões semânticos em mensagens de commit. (Gostamos do padrão de commits do repositório [AngularJS](http://karma-runner.github.io/3.0/dev/git-commit-msg.html))
-- Caso você nao consiga completar tudo e tenha algum receio, não se preocupe, iremos avaliar o que foi entregue, mesmo com pendências.
-- O diferencial para este desafio: layout, ux e ui, bem como implementação de boas práticas de segurança, performance e/ou estrutura.
-
-
-## Dicas e Informações Valiosas
-
-#### O que gostaríamos de ver em seu teste:
-- Convenção de nome em classes, objetos, variáveis, métodos e etc.
-- layout encantador
-- Faça commits regulares. Eles são melhores do que um commit gigantesco. Gostaríamos de ver commits organizados e padronizados, então capriche neles!
-- Animações, Sombras, Menus, componentes de Libs de UX implementados.
-- **Bônus 1** Dark Mode, implementação sendo um botão que mude o padrão de cores da pagina para escuro e claro com 1 click ou que siga a configuração do dispositivo do cliente.
-- **Bônus 2** Listagem de favoritos, com algum mecanismo de cache.
-- **Bônus 3** Outros filtros além dos sugeridos na descrição inicial
-- **Bônus 4** Testes automatizados
-
-**Observação:** Nenhum dos itens acima é obrigatório.
-
-#### O que o seu Teste não deve ter:
-- Saber que não foi você quem implementou o projeto.
-- Varias bibliotecas instaladas sem uso.
-- Falta de organização de código.
-- Falta de documentação.
-- Nome de variáveis sem sentido ou sem padrão de nomes.
-- Histórico de commits desorganizado e despadronizado.
-
-## Boa Sorte!!
