@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rick_and_morty_app/features/list_characters/controller/list_characters_controller.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../../../core/core.dart';
+import '../../../details_characters/presenter/details_chatacter_presenter.dart';
 
 class CardCharacter extends StatelessWidget {
   const CardCharacter({
@@ -52,7 +54,16 @@ class CardCharacter extends StatelessWidget {
               ],
             ),
           ),
-          InteractiveViewer(
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => DetailsCharacterPresenter(
+                      character: character,
+                    ),
+                  ));
+            },
             child: Image.network(
               character.image ?? "",
               errorBuilder: (context, error, stackTrace) {
