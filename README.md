@@ -1,24 +1,24 @@
-### Projeto
+# Projeto
 OBS: Devido ao prazo em que tive para entregar o projeto, o aplicativo ficou bem corrido, com possibilidades de melhoria, especialmente com relação ao visual das telas (comecei fazendo pequenos pedaços em intervalos no trabalho, e foquei depois das 18 até o horário limite 23:59).
 Algumas ideias deixarei com (*) representando ações que foram afetadas por causa da entrega
 
-#### Como padrão, comecei o desenvolvimento criando as pastas que pensei necessárias para o projeto quando fosse inicializa-lo, são essas:
+## Como padrão, comecei o desenvolvimento criando as pastas que pensei necessárias para o projeto quando fosse inicializa-lo, são essas:
 
-- **/assets**: De inicio criei a pasta aqui para deixar vários arquivos SVG afim de deixar o aplicativo com uma cara moderna e amigável(*)
-- **/core**: Aonde ficarão objetos necessários para a aplicação, como:
-* os dados do aplicativo; 
-* arquivos de cache; 
-* algumas strigns usadas em vários lugares na aplicação (Ideal seria deixar um arquivo em core com as strings mais utilizadas e um arquivo especifico em cada feature (*))
+### **/assets**: De inicio criei a pasta aqui para deixar vários arquivos SVG afim de deixar o aplicativo com uma cara moderna e amigável(*)
+### **/core**: Aonde ficarão objetos necessários para a aplicação, como:
+* Os dados do aplicativo; 
+* Arquivos de cache; 
+* Algumas strigns usadas em vários lugares na aplicação (Ideal seria deixar um arquivo em core com as strings mais utilizadas e um arquivo especifico em cada feature (*))
 * Funções e Widgets que podem ser usados em toda a aplicação
-- **/features**: Aqui estão todas as telas na aplicação, as pastas padrões são:
-* /controller: com os controllers da das telas responsáveis pelo gerenciamento de estado das telas
-* /repository: arquivos para fazer acesso aos dados que serão consumidos pelos controller e presenter
-* /presenter: telas e widgets em si
-* algumas telas podem ter mais pastas, como:
-* - /data: aonde ficarão objetos que somente aquele recurso deve consumir
-* - /componets: local aonde podem ficar alguns widgets ou recursos mais genéricos para a feature (*)
+## **/features**: Aqui estão todas as telas na aplicação, as pastas padrões são:
+#### /controller: com os controllers da das telas responsáveis pelo gerenciamento de estado das telas
+#### /repository: arquivos para fazer acesso aos dados que serão consumidos pelos controller e presenter
+#### /presenter: telas e widgets em si
+#### algumas telas podem ter mais pastas, como:
+#### - /data: aonde ficarão objetos que somente aquele recurso deve consumir
+#### - /componets: local aonde podem ficar alguns widgets ou recursos mais genéricos para a feature (*)
 
-#### test
+## test
 - **/test** a pasta de test deve seguir as mesmas estruturas que a pasta de produção (/lib)]
 
 Com as pastas criadas comecei a implementa-las, começando pela /core, com as classes que seriam necessárias para a aplicação
