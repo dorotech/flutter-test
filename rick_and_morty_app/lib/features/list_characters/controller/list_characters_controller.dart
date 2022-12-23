@@ -15,7 +15,7 @@ abstract class ListCharactersControllerBase with Store {
   FilterInputs? filterInputs;
 
   @observable
-  ListCharacter? listCharacter = ListCharacter();
+  ListCharacter listCharacter = ListCharacter();
   @observable
   List<Character> characterFavorites = [];
   @observable
@@ -24,8 +24,7 @@ abstract class ListCharactersControllerBase with Store {
   @action
   Future getListCharacters() async {
     if (showFavorite) {
-      listCharacter ??= ListCharacter();
-      listCharacter?.results = characterFavorites;
+      listCharacter.results = characterFavorites;
       return listCharacter;
     }
 

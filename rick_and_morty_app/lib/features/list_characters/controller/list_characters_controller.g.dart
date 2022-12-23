@@ -13,13 +13,13 @@ mixin _$ListCharactersController on ListCharactersControllerBase, Store {
       name: 'ListCharactersControllerBase.listCharacter', context: context);
 
   @override
-  ListCharacter? get listCharacter {
+  ListCharacter get listCharacter {
     _$listCharacterAtom.reportRead();
     return super.listCharacter;
   }
 
   @override
-  set listCharacter(ListCharacter? value) {
+  set listCharacter(ListCharacter value) {
     _$listCharacterAtom.reportWrite(value, super.listCharacter, () {
       super.listCharacter = value;
     });

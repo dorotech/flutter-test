@@ -39,20 +39,23 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
             ),
             tooltip: "Exibir favoritos",
           ),
-          IconButton(
-            onPressed: () async {
-              dynamic filter = await Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (_) => FilterUi(filterInputs: _controller.filterInputs),
-                ),
-              );
-              if (filter is FilterInputs) {
-                _controller.filterInputs = filter;
-              }
-              setState(() {});
-            },
-            icon: const Icon(MdiIcons.magnify),
+          Visibility(
+            visible: !_controller.showFavorite,
+            child: IconButton(
+              onPressed: () async {
+                dynamic filter = await Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (_) => FilterUi(filterInputs: _controller.filterInputs),
+                  ),
+                );
+                if (filter is FilterInputs) {
+                  _controller.filterInputs = filter;
+                }
+                setState(() {});
+              },
+              icon: const Icon(MdiIcons.magnify),
+            ),
           ),
         ],
       ),
@@ -66,8 +69,8 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
             } else if (snapshot.hasData) {
               return _body();
             } else {
-              if (_controller.listCharacter?.results != null) {
-                if (_controller.listCharacter!.results!.isEmpty) {
+              if (_controller.listCharacter.results != null) {
+                if (_controller.listCharacter.results!.isEmpty) {
                   return const Center(
                     child: Text("no data found"),
                   );
@@ -91,13 +94,13 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
         onPressed: () {
           setState(() {});
         },
-        child: Text("Carregar novamente"));
+        child: Text(DefalutStrings.tryAgain));
   }
 
   Widget _body() {
-    if (_controller.listCharacter?.results?.isEmpty ?? true) {
+    if (_controller.listCharacter.results?.isEmpty ?? true) {
       return Center(
-        child: Text(_controller.showFavorite ? "Não há favoritos" : "Lista vazia"),
+        child: Text(_controller.showFavorite ? DefalutStrings.noFavorites : DefalutStrings.emptyList),
       );
     }
     return RefreshIndicator(
@@ -105,9 +108,9 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
         setState(() {});
       },
       child: ListView.builder(
-        itemCount: _controller.listCharacter?.results?.length ?? 0,
+        itemCount: _controller.listCharacter.results?.length ?? 0,
         itemBuilder: (context, index) {
-          Character character = _controller.listCharacter!.results![index];
+          Character character = _controller.listCharacter.results![index];
           return CardCharacter(character: character, controller: _controller);
         },
       ),

@@ -69,9 +69,8 @@ void main() {
         await sut.getListCharacters();
 
         /// Assert
-        expect(sut.listCharacter != null, true);
-        expect(sut.listCharacter?.info != null, true);
-        expect(sut.listCharacter?.results?.length, 1);
+        expect(sut.listCharacter.info != null, true);
+        expect(sut.listCharacter.results?.length, 1);
       });
 
       test("Should get favorites character", () async {
@@ -84,8 +83,8 @@ void main() {
 
         /// Assert
         expect(list != null, true);
-        expect(sut.listCharacter?.results?.length, 1);
-        expect(sut.listCharacter?.results?.first.id, idFake);
+        expect(sut.listCharacter.results?.length, 1);
+        expect(sut.listCharacter.results?.first.id, idFake);
       });
     });
   });
