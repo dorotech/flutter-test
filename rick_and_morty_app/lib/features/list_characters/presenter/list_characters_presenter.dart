@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:rick_and_morty_app/core/core.dart';
@@ -107,13 +108,27 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
       onRefresh: () async {
         setState(() {});
       },
-      child: ListView.builder(
-        itemCount: _controller.listCharacter.results?.length ?? 0,
-        itemBuilder: (context, index) {
-          Character character = _controller.listCharacter.results![index];
-          return CardCharacter(character: character, controller: _controller);
-        },
-      ),
+      child: kIsWeb
+          ? GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 500,
+                childAspectRatio: 2 / 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              itemCount: _controller.listCharacter.results?.length ?? 0,
+              itemBuilder: (context, index) {
+                Character character = _controller.listCharacter.results![index];
+                return CardCharacter(character: character, controller: _controller);
+              },
+            )
+          : ListView.builder(
+              itemCount: _controller.listCharacter.results?.length ?? 0,
+              itemBuilder: (context, index) {
+                Character character = _controller.listCharacter.results![index];
+                return CardCharacter(character: character, controller: _controller);
+              },
+            ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/core/core.dart';
 import 'package:rick_and_morty_app/features/list_characters/data/filter_inputs.dart';
@@ -34,27 +35,11 @@ class _FilterUiState extends State<FilterUi> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _textFormField(),
-              TextTitle(DefalutStrings.selectGender),
-              _listGender(),
-              TextTitle(DefalutStrings.selectSpecie),
-              _listSpecies(),
-              TextTitle(DefalutStrings.selectStatus),
-              _listStatus(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(onPressed: _clean, child: Text(DefalutStrings.cleanInputs)),
-                ],
-              )
-            ],
-          ),
+        child: Center(
+          child: Container(
+              constraints: !kIsWeb ? null : const BoxConstraints(maxWidth: 720),
+              padding: const EdgeInsets.all(8.0),
+              child: _fields()),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -80,6 +65,29 @@ class _FilterUiState extends State<FilterUi> {
               ));
         },
       ),
+    );
+  }
+
+  Widget _fields() {
+    return Column(
+      mainAxisAlignment: kIsWeb ? MainAxisAlignment.center : MainAxisAlignment.start,
+      crossAxisAlignment: kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      children: [
+        _textFormField(),
+        const SizedBox(height: 40),
+        TextTitle(DefalutStrings.selectGender),
+        _listGender(),
+        TextTitle(DefalutStrings.selectSpecie),
+        _listSpecies(),
+        TextTitle(DefalutStrings.selectStatus),
+        _listStatus(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            TextButton(onPressed: _clean, child: Text(DefalutStrings.cleanInputs)),
+          ],
+        )
+      ],
     );
   }
 
