@@ -1,5 +1,6 @@
 {
     "conventionalCommits.scopes": [
-        "app body"
+        "app body",
+        "exential dependencies"
     ]
 }
