@@ -73,23 +73,23 @@ class CharacterAdapter extends TypeAdapter<Character> {
           typeId == other.typeId;
 }
 
-class ListCharacterLoversAdapter extends TypeAdapter<ListCharacterLovers> {
+class CharacterFavoriteAdapter extends TypeAdapter<CharacterFavorite> {
   @override
   final int typeId = 3;
 
   @override
-  ListCharacterLovers read(BinaryReader reader) {
+  CharacterFavorite read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ListCharacterLovers(
+    return CharacterFavorite(
       listCharacter: (fields[0] as List?)?.cast<Character>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, ListCharacterLovers obj) {
+  void write(BinaryWriter writer, CharacterFavorite obj) {
     writer
       ..writeByte(1)
       ..writeByte(0)
@@ -102,7 +102,7 @@ class ListCharacterLoversAdapter extends TypeAdapter<ListCharacterLovers> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ListCharacterLoversAdapter &&
+      other is CharacterFavoriteAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

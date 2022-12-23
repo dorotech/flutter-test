@@ -8,7 +8,7 @@ import 'package:rick_and_morty_app/features/list_characters/data/data.dart';
 import 'package:rick_and_morty_app/features/list_characters/presenter/ui/ui.dart';
 
 class ListCharactersPresenter extends StatefulWidget {
-  ListCharactersPresenter({super.key});
+  const ListCharactersPresenter({super.key});
 
   @override
   State<ListCharactersPresenter> createState() => _ListCharactersPresenterState();
@@ -16,6 +16,11 @@ class ListCharactersPresenter extends StatefulWidget {
 
 class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
   final ListCharactersController _controller = ListCharactersController();
+  @override
+  void initState() {
+    _controller.initCharactersFavorites();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +29,15 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
         title: const Text("Rick and Morty"),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              MdiIcons.heart,
+            onPressed: () {
+              _controller.showFavorite = !_controller.showFavorite;
+              setState(() {});
+            },
+            icon: Icon(
+              _controller.showFavorite ? MdiIcons.heart : MdiIcons.heartOutline,
               color: Colors.red,
             ),
+            tooltip: "Exibir favoritos",
           ),
           IconButton(
             onPressed: () async {
@@ -57,7 +66,7 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
             } else if (snapshot.hasData) {
               return _body();
             } else {
-              if (_controller.listCharacter!.results != null) {
+              if (_controller.listCharacter?.results != null) {
                 if (_controller.listCharacter!.results!.isEmpty) {
                   return const Center(
                     child: Text("no data found"),
@@ -65,21 +74,41 @@ class _ListCharactersPresenterState extends State<ListCharactersPresenter> {
                 }
               }
               return Center(
-                child: Text(snapshot.error.toString()),
+                child: Column(
+                  children: [
+                    Text(snapshot.error.toString()),
+                    tryAgain(),
+                  ],
+                ),
               );
             }
           }),
     );
   }
 
+  Widget tryAgain() {
+    return ElevatedButton(
+        onPressed: () {
+          setState(() {});
+        },
+        child: Text("Carregar novamente"));
+  }
+
   Widget _body() {
+    if (_controller.listCharacter?.results?.isEmpty ?? true) {
+      return Center(
+        child: Text(_controller.showFavorite ? "Não há favoritos" : "Lista vazia"),
+      );
+    }
     return RefreshIndicator(
-      onRefresh: () async {},
+      onRefresh: () async {
+        setState(() {});
+      },
       child: ListView.builder(
         itemCount: _controller.listCharacter?.results?.length ?? 0,
         itemBuilder: (context, index) {
           Character character = _controller.listCharacter!.results![index];
-          return CardCharacter(character: character);
+          return CardCharacter(character: character, controller: _controller);
         },
       ),
     );

@@ -84,8 +84,8 @@ class Character {
 }
 
 @HiveType(typeId: 3)
-class ListCharacterLovers {
-  ListCharacterLovers({this.listCharacter});
+class CharacterFavorite {
+  CharacterFavorite({this.listCharacter});
 
   @HiveField(0)
   List<Character>? listCharacter;

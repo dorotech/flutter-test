@@ -84,7 +84,7 @@ class _FilterUiState extends State<FilterUi> {
   }
 
   Widget _textFormField() {
-    BorderRadius borderRadius = BorderRadius.all(Radius.circular(20.0));
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(20.0));
     return TextField(
       controller: nameTextController,
       decoration: InputDecoration(

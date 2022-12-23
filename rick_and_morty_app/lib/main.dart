@@ -16,11 +16,17 @@ void main() async {
       ..init(appDocumentDir.path)
       ..registerAdapter(CharacterAdapter())
       ..registerAdapter(LocationAdapter())
-      ..registerAdapter(ListCharacterLoversAdapter());
+      ..registerAdapter(CharacterFavoriteAdapter())
+      ..registerAdapter(StatusAdapter())
+      ..registerAdapter(SpeciesAdapter())
+      ..registerAdapter(GenderAdapter());
   } else {
     Hive.registerAdapter(CharacterAdapter());
     Hive.registerAdapter(LocationAdapter());
-    Hive.registerAdapter(ListCharacterLoversAdapter());
+    Hive.registerAdapter(CharacterFavoriteAdapter());
+    Hive.registerAdapter(StatusAdapter());
+    Hive.registerAdapter(SpeciesAdapter());
+    Hive.registerAdapter(GenderAdapter());
   }
 
   runApp(const MyApp());
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
-      home: ListCharactersPresenter(),
+      home: const ListCharactersPresenter(),
     );
   }
 }

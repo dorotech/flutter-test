@@ -1,11 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:rick_and_morty_app/core/core.dart';
 
-import '../cache.dart';
-
-class DirectusUserMeCache implements CacheModel {
-  static String modelValue = "CharacterValue";
-  static String boxValue = "CharacterBox";
+class CharacterFavoriteCache implements CacheModel {
+  static String modelValue = "CharacterFavoriteValue";
+  static String boxValue = "CharacterFavoriteBox";
   @override
   Future<void> cleanModel() async {
     Box box = await getBox();
@@ -25,24 +23,24 @@ class DirectusUserMeCache implements CacheModel {
   }
 
   @override
-  Future<Character?> getModel() async {
+  Future<CharacterFavorite> getModel() async {
     try {
       Box box = await getBox();
 
-      return await box.get(modelValue);
+      return await box.get(modelValue) ?? CharacterFavorite(listCharacter: []);
     } catch (e) {
-      return null;
+      return CharacterFavorite(listCharacter: []);
     }
   }
 
   @override
   Future<void> setModel(model) async {
-    if (model is Character) {
+    if (model is CharacterFavorite) {
       Box box = await getBox();
 
       await box.put(modelValue, model);
     } else {
-      throw "model is not a Character";
+      throw "model is not a ListCharacterLovers";
     }
   }
 }
