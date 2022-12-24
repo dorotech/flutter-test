@@ -1,3 +1,4 @@
+import 'package:expansion_card/expansion_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,12 +15,15 @@ class CharacterListScreen extends StatefulWidget {
 
 class _CharacterListScreenState extends State<CharacterListScreen> {
   late RickandMortyCubit _cubit;
+
   int? _selectedIndex;
   String? _nameCharacter;
   String? _img;
   String? _gender;
-  String? _type;
   String? _status;
+  String? _species;
+  String? _type;
+
   @override
   void initState() {
     _cubit = BlocProvider.of<RickandMortyCubit>(context);
@@ -31,17 +35,39 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
     _cubit.getRickandMorty();
   }
 
+  bool valuefirst = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: AppColors.mainColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+          child: Column(
+            children: [
+              Text(
+                'FILTROS',
+                style: GoogleFonts.sourceSansPro(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           "PERSONAGENS",
           style: GoogleFonts.sourceSansPro(
-              color: Colors.white, fontSize: 30, fontWeight: FontWeight.w600),
+              backgroundColor: AppColors.black,
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.w600),
         ),
-        backgroundColor: AppColors.mainColor,
+        backgroundColor: AppColors.black,
       ),
       backgroundColor: AppColors.black,
       body: BlocConsumer<RickandMortyCubit, RickandMortyState>(
@@ -67,59 +93,82 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                         state.rickandMortyModel!.results[index].name;
                     _img = state.rickandMortyModel!.results[index].image;
                     _gender = state.rickandMortyModel!.results[index].gender;
-                    _type = state.rickandMortyModel!.results[index].type;
                     _status = state.rickandMortyModel!.results[index].status;
+                    _species = state.rickandMortyModel!.results[index].species;
+                    _type = state.rickandMortyModel!.results[index].type;
                   }
 
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: AppColors.mainColor,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ExpansionCard(
+                          background: Image.network(
+                            _img!,
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 _nameCharacter!,
                                 style: GoogleFonts.sourceSansPro(
-                                    color: Colors.white,
-                                    fontSize: 19,
+                                    backgroundColor: AppColors.mainColor,
+                                    color: AppColors.white,
+                                    fontSize: 30,
                                     fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(
-                                width: 10,
+                                height: 20,
                               ),
                               Text(
                                 _status!,
                                 style: GoogleFonts.sourceSansPro(
-                                    color: Colors.white,
-                                    fontSize: 19,
+                                    backgroundColor: AppColors.black,
+                                    color: AppColors.white,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w700),
                               ),
-                              SizedBox(
-                                height: 80,
-                                width: 80,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      image: NetworkImage(_img!),
-                                    ),
-                                  ),
-                                ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                _gender!,
+                                style: GoogleFonts.sourceSansPro(
+                                    backgroundColor: AppColors.black,
+                                    color: AppColors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                _species!,
+                                style: GoogleFonts.sourceSansPro(
+                                    backgroundColor: AppColors.black,
+                                    color: AppColors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                _type!,
+                                style: GoogleFonts.sourceSansPro(
+                                    backgroundColor: AppColors.black,
+                                    color: AppColors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w700),
                               ),
                             ],
                           ),
                         ),
                       ),
-                    ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                    ],
                   );
                 }),
                 itemCount: _selectedIndex ?? 0),

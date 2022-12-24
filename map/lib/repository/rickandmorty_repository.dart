@@ -21,7 +21,7 @@ class RickandMortyRepositoryImplementation implements RickandMortyRepository {
     );
     if (response.statusCode == 200) {
       var jsonResponse = json.decode(response.body);
-      print(jsonResponse);
+
       return RickandMortyModel.fromJson(jsonResponse);
     } else {
       throw Exception('Failed to load post');
