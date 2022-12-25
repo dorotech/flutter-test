@@ -45,94 +45,7 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: AppColors.mainColor,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
-          child: Column(
-            children: [
-              Text(
-                'FILTROS',
-                style: GoogleFonts.sourceSansPro(
-                    color: AppColors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    nameVisible = !nameVisible;
-                  });
-                },
-                child: Text(
-                  'Name',
-                  style: GoogleFonts.sourceSansPro(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    statusVisible = !statusVisible;
-                  });
-                },
-                child: Text(
-                  'Status',
-                  style: GoogleFonts.sourceSansPro(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    genderVisible = !genderVisible;
-                  });
-                },
-                child: Text(
-                  'Gender',
-                  style: GoogleFonts.sourceSansPro(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    speciesVisible = !speciesVisible;
-                  });
-                },
-                child: Text(
-                  'Species',
-                  style: GoogleFonts.sourceSansPro(
-                      color: AppColors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: filtersSideMenu(),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -160,108 +73,202 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
         },
         builder: (context, state) {
           return SingleChildScrollView(
-            child: ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: ((context, index) {
-                  if (state is RickandMortyLoaded) {
-                    _nameCharacter =
-                        state.rickandMortyModel!.results[index].name;
-                    _img = state.rickandMortyModel!.results[index].image;
-                    _gender = state.rickandMortyModel!.results[index].gender;
-                    _status = state.rickandMortyModel!.results[index].status;
-                    _species = state.rickandMortyModel!.results[index].species;
-                    _type = state.rickandMortyModel!.results[index].type;
-                  }
+            child: characterList(state),
+          );
+        },
+      ),
+    );
+  }
 
-                  return Column(
+  ListView characterList(RickandMortyState state) {
+    return ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: ((context, index) {
+          if (state is RickandMortyLoaded) {
+            _nameCharacter = state.rickandMortyModel!.results[index].name;
+            _img = state.rickandMortyModel!.results[index].image;
+            _gender = state.rickandMortyModel!.results[index].gender;
+            _status = state.rickandMortyModel!.results[index].status;
+            _species = state.rickandMortyModel!.results[index].species;
+            _type = state.rickandMortyModel!.results[index].type;
+          }
+
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: ExpansionCard(
+                  background: Image.network(
+                    _img!,
+                  ),
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: ExpansionCard(
-                          background: Image.network(
-                            _img!,
-                          ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Visibility(
-                                visible: nameVisible,
-                                child: Text(
-                                  _nameCharacter!,
-                                  style: GoogleFonts.sourceSansPro(
-                                      backgroundColor: AppColors.mainColor,
-                                      color: AppColors.white,
-                                      fontSize: 30,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Visibility(
-                                visible: statusVisible,
-                                child: Text(
-                                  _status!,
-                                  style: GoogleFonts.sourceSansPro(
-                                      backgroundColor: AppColors.black,
-                                      color: AppColors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Visibility(
-                                visible: genderVisible,
-                                child: Text(
-                                  _gender!,
-                                  style: GoogleFonts.sourceSansPro(
-                                      backgroundColor: AppColors.black,
-                                      color: AppColors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Visibility(
-                                visible: speciesVisible,
-                                child: Text(
-                                  _species!,
-                                  style: GoogleFonts.sourceSansPro(
-                                      backgroundColor: AppColors.black,
-                                      color: AppColors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                _type!,
-                                style: GoogleFonts.sourceSansPro(
-                                    backgroundColor: AppColors.black,
-                                    color: AppColors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ],
-                          ),
+                      Visibility(
+                        visible: nameVisible,
+                        child: Text(
+                          _nameCharacter!,
+                          style: GoogleFonts.sourceSansPro(
+                              backgroundColor: AppColors.mainColor,
+                              color: AppColors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700),
                         ),
                       ),
                       const SizedBox(
-                        height: 50,
+                        height: 20,
+                      ),
+                      Visibility(
+                        visible: statusVisible,
+                        child: Text(
+                          _status!,
+                          style: GoogleFonts.sourceSansPro(
+                              backgroundColor: AppColors.black,
+                              color: AppColors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Visibility(
+                        visible: genderVisible,
+                        child: Text(
+                          _gender!,
+                          style: GoogleFonts.sourceSansPro(
+                              backgroundColor: AppColors.black,
+                              color: AppColors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Visibility(
+                        visible: speciesVisible,
+                        child: Text(
+                          _species!,
+                          style: GoogleFonts.sourceSansPro(
+                              backgroundColor: AppColors.black,
+                              color: AppColors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        _type!,
+                        style: GoogleFonts.sourceSansPro(
+                            backgroundColor: AppColors.black,
+                            color: AppColors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700),
                       ),
                     ],
-                  );
-                }),
-                itemCount: _selectedIndex ?? 0),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+            ],
           );
-        },
+        }),
+        itemCount: _selectedIndex ?? 0);
+  }
+
+  Drawer filtersSideMenu() {
+    return Drawer(
+      backgroundColor: AppColors.mainColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+        child: Column(
+          children: [
+            Text(
+              'FILTROS',
+              style: GoogleFonts.sourceSansPro(
+                  color: AppColors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  nameVisible = !nameVisible;
+                });
+              },
+              child: Text(
+                'Name',
+                style: GoogleFonts.sourceSansPro(
+                    color: AppColors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  statusVisible = !statusVisible;
+                });
+              },
+              child: Text(
+                'Status',
+                style: GoogleFonts.sourceSansPro(
+                    color: AppColors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  genderVisible = !genderVisible;
+                });
+              },
+              child: Text(
+                'Gender',
+                style: GoogleFonts.sourceSansPro(
+                    color: AppColors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  speciesVisible = !speciesVisible;
+                });
+              },
+              child: Text(
+                'Species',
+                style: GoogleFonts.sourceSansPro(
+                    color: AppColors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
