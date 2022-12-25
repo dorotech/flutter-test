@@ -1,0 +1,8 @@
+{
+    "conventionalCommits.scopes": [
+        "app body",
+        "exential dependencies",
+        "creating the structure for API consumption",
+        "Filters"
+    ]
+}
