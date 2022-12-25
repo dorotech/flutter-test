@@ -24,6 +24,11 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
   String? _species;
   String? _type;
 
+  bool nameVisible = true;
+  bool genderVisible = true;
+  bool statusVisible = true;
+  bool speciesVisible = true;
+
   @override
   void initState() {
     _cubit = BlocProvider.of<RickandMortyCubit>(context);
@@ -49,9 +54,80 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
               Text(
                 'FILTROS',
                 style: GoogleFonts.sourceSansPro(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontSize: 30,
                     fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    nameVisible = !nameVisible;
+                  });
+                },
+                child: Text(
+                  'Name',
+                  style: GoogleFonts.sourceSansPro(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    statusVisible = !statusVisible;
+                  });
+                },
+                child: Text(
+                  'Status',
+                  style: GoogleFonts.sourceSansPro(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    genderVisible = !genderVisible;
+                  });
+                },
+                child: Text(
+                  'Gender',
+                  style: GoogleFonts.sourceSansPro(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    speciesVisible = !speciesVisible;
+                  });
+                },
+                child: Text(
+                  'Species',
+                  style: GoogleFonts.sourceSansPro(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
               ),
             ],
           ),
@@ -107,48 +183,60 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                             _img!,
                           ),
                           title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text(
-                                _nameCharacter!,
-                                style: GoogleFonts.sourceSansPro(
-                                    backgroundColor: AppColors.mainColor,
-                                    color: AppColors.white,
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.w700),
+                              Visibility(
+                                visible: nameVisible,
+                                child: Text(
+                                  _nameCharacter!,
+                                  style: GoogleFonts.sourceSansPro(
+                                      backgroundColor: AppColors.mainColor,
+                                      color: AppColors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                _status!,
-                                style: GoogleFonts.sourceSansPro(
-                                    backgroundColor: AppColors.black,
-                                    color: AppColors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
+                              Visibility(
+                                visible: statusVisible,
+                                child: Text(
+                                  _status!,
+                                  style: GoogleFonts.sourceSansPro(
+                                      backgroundColor: AppColors.black,
+                                      color: AppColors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                _gender!,
-                                style: GoogleFonts.sourceSansPro(
-                                    backgroundColor: AppColors.black,
-                                    color: AppColors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
+                              Visibility(
+                                visible: genderVisible,
+                                child: Text(
+                                  _gender!,
+                                  style: GoogleFonts.sourceSansPro(
+                                      backgroundColor: AppColors.black,
+                                      color: AppColors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
-                              Text(
-                                _species!,
-                                style: GoogleFonts.sourceSansPro(
-                                    backgroundColor: AppColors.black,
-                                    color: AppColors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
+                              Visibility(
+                                visible: speciesVisible,
+                                child: Text(
+                                  _species!,
+                                  style: GoogleFonts.sourceSansPro(
+                                      backgroundColor: AppColors.black,
+                                      color: AppColors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700),
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
