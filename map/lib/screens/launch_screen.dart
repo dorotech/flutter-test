@@ -56,7 +56,10 @@ class _LaunchScreenState extends State<LaunchScreen>
           Image.asset('assets/images/logo.png'),
           AnimatedBuilder(
             animation: animationController,
-            child: Image.asset('assets/images/portal.png'),
+            child: SizedBox(
+                height: 400,
+                width: 400,
+                child: Image.asset('assets/images/portal.png')),
             builder: (BuildContext context, Widget? widget) {
               return Transform.rotate(
                 angle: animationController.value * 6.3,
